@@ -4,59 +4,150 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+    <style>
+      table {
+        border-collapse: collapse;
+        width: 100%;
+      }
+
+      th,
+      td {
+        text-align: left;
+        padding: 8px;
+      }
+
+      th {
+        background-color: #f2f2f2;
+      }
+
+      tr:nth-child(even) {
+        background-color: #f2f2f2;
+      }
+
+      a {
+        text-decoration: none;
+        color: #000;
+      }
+
+      a:hover {
+        color: #555;
+      }
+    </style>
+    <script>
+      function sortTable(n) {
+        var table,
+          rows,
+          switching,
+          i,
+          x,
+          y,
+          shouldSwitch,
+          dir,
+          switchcount = 0;
+        table = document.getElementById("myTable");
+        switching = true;
+        dir = "asc";
+        while (switching) {
+          switching = false;
+          rows = table.rows;
+          for (i = 1; i < rows.length - 1; i++) {
+            shouldSwitch = false;
+            x = rows[i].getElementsByTagName("TD")[n];
+            y = rows[i + 1].getElementsByTagName("TD")[n];
+            if (dir == "asc") {
+              if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+                shouldSwitch = true;
+                break;
+              }
+            } else if (dir == "desc") {
+              if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+                shouldSwitch = true;
+                break;
+              }
+            }
+          }
+          if (shouldSwitch) {
+            rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+            switching = true;
+            switchcount++;
+          } else {
+            if (switchcount == 0 && dir == "asc") {
+              dir = "desc";
+              switching = true;
+            }
+          }
+        }
+      }
+    </script>
   </head>
   <body>
-    <table border="">
+    <table id="myTable">
       <thead>
         <tr>
-          <th>Nombre de la practica</th>
-          <th>Descripcion</th>
-          <th>Hipervinculo</th>
+          <th onclick="sortTable(0)">Nombre de la práctica</th>
+          <th onclick="sortTable(1)">Descripción</th>
+          <th onclick="sortTable(2)">Hipervínculo</th>
         </tr>
       </thead>
 
       <tbody>
         <tr>
-          <td>Practica #1</td>
-          <td>Elementos basicos de html</td>
+          <td>Práctica #1</td>
+          <td>Elementos básicos de HTML</td>
           <td>
-            <a href="parcial1/Practica 1/practica1.html"> Ir a las practicas</a>
+            <a href="parcial1/Practica 1/practica1.html">Ir a las prácticas</a>
           </td>
         </tr>
         <tr>
-          <td>Practica #2</td>
-          <td> Elementos HTML parte 2</td>
+          <td>Práctica #2</td>
+          <td>Elementos HTML parte 2</td>
           <td>
-            <a href="parcial1/Practica 2/Practica2.html"> Ir a las practicas</a>
+            <a href="parcial1/Practica 2/Practica2.html">Ir a las prácticas</a>
           </td>
         </tr>
         <tr>
-          <td>Practica #3</td>
-          <td> Elementos HTML y propiedades CSS</td>
+          <td>Práctica #3</td>
+          <td>Elementos HTML y propiedades CSS</td>
           <td>
-            <a href="parcial1/Practica 3/practica3.html"> Ir a las practicas</a>
+            <a href="parcial1/Practica 3/practica3.html">Ir a las prácticas</a>
           </td>
         </tr>
         <tr>
-          <td>Practica #4</td>
-          <td>Manejo de imagenes en html</td>
+          <td>Práctica #4</td>
+          <td>Manejo de imágenes en HTML</td>
           <td>
-            <a href="/parcial1/Practica 4/practica4.html"> Ir a las practicas</a>
+            <a href="/parcial1/Practica 4/practica4.html">Ir a las prácticas</a>
           </td>
         </tr>
-        <tr><td>Practica #5</td>
-          <td>Manejos de tablas en HTML</td>
+        <tr>
+          <td>Práctica #5</td>
+          <td>Manejo de tablas en HTML</td>
           <td>
-            <a href="/parcial1/prectica 5/Practica 5.html"> Ir a las practicas</a>
-          </td></tr>
+            <a href="/parcial1/prectica 5/Practica 5.html">Ir a las
+              prácticas</a>
+          </td>
         </tr>
-      </tr>
-      <tr><td>Practica #6</td>
-        <td>Formularios en HTML para registro del CLIENTE</td>
-        <td>
-          <a href="/parcial1/practica 6/practica6.html"> Ir a las practicas</a>
-        </td></tr>
-      </tr>
+        <tr>
+          <td>Práctica #6</td>
+          <td>Formularios en HTML para registro del CLIENTE</td>
+          <td>
+            <a href="/parcial1/practica 6/practica6.html">Ir a las prácticas</a>
+          </td>
+        </tr>
+        <tr>
+          <td>Práctica #7</td>
+          <td>Posicionamiento en HTML</td>
+          <td>
+            <a href="/parcial1/Practica 7/practica7.html">Ir a las prácticas</a>
+          </td>
+        </tr>
+        <tr>
+          <td>Práctica #8</td>
+          <td>Lotería</td>
+          <td>
+            <a href="/parcial1/practica 8/practica8.html">Ir a las prácticas</a>
+          </td>
+        </tr>
       </tbody>
     </table>
   </body>
