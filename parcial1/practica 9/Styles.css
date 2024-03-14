@@ -1,0 +1,15 @@
+.parrafo {
+    border: 1px solid black;
+    text-align: center;
+    margin: auto;
+    color: #4f2e7e;
+    font-size: medium;
+    font-weight: 500;
+    padding: 10px;
+    width: 50%;
+    background-color: #f2f2f2;
+    border-radius: 10px;
+    box-shadow: 5px 5px 5px #888888;
+
+
+}

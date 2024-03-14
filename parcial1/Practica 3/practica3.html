@@ -2,54 +2,63 @@
 <html lang="es">
 
 <head>
-
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Practica #3. Elementos HTML y propiedades CSS (Gonzalez Rodriguez Omar)</title>
+    <style>
+        body {
+            text-align: center;
+        }
 
+        h1 {
+            font-family: monospace;
+            color: teal;
+        }
+
+        .container {
+            background-color: #e4c674b6;
+            border: 7px solid rgba(86, 137, 172, 0.712);
+            margin: 30px;
+            color: rgb(5, 29, 21);
+            border-radius: 15px;
+            padding: 40px;
+        }
+
+        .container pre {
+            white-space: pre-wrap;
+            text-decoration: overline;
+        }
+    </style>
 </head>
 
 <body>
+    <h1>Practica #3. Elementos HTML y propiedades CSS</h1>
 
-    <div style="text-align:center;">
-
-        <h1 style="font-family: monospace; color: teal">
-            Practica #3. Elementos HTML y propiedades CSS
-        </h1>
-
-    </div>
-
-    <div
-        style="background-color: #e4c674b6; border: 7px solid #5689acb6; margin: 30px; padding: 100px; color:rgb(0, 0, 0); text-decoration: dashed;">
-
-        Estilos: <br>
+    <div class="container">
+        Estilos:
         <pre>
 background-color: #e4c674b6;
-border: 7px solid #5689acb6;
-margin: 30px; padding: 100px;
-color:rgb(0, 0, 0);
-text-decoration: overline;
-     </pre>
-
-
+border: 7px solid rgba(86, 137, 172, 0.712);
+margin: 30px;
+color: rgb(5, 29, 21);
+border-radius: 15px;
+        </pre>
     </div>
 
-    <div style="background-color: #e4c674b6; border: 7px solid rgba(86, 137, 172, 0.712); margin: 30px; color:rgb(5, 29, 21); border-radius: 15px; ">
-    
+    <div class="container">
         Estilos:
-    <pre>
+        <pre>
 background-color: #e4c674b6;
 border: 7px solid rgba(86, 137, 172, 0.712);
-margin: 30px; color:rgb(5, 29, 21);
+margin: 30px;
+color: rgb(5, 29, 21);
 border-radius: 15px;
-    </pre>
-
+        </pre>
     </div>
 
-    <div style="background-color: #e4c674b6; border: 7px solid rgba(86, 137, 172, 0.712); margin: 30px; color:rgb(5, 29, 21); border-radius: 15px; padding: 40px; ">
+    <div class="container">
         <strong>Gonzalez Rodriguez Omar (Practica 3)</strong>
     </div>
-
 </body>
 
 </html>
