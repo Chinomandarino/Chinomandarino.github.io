@@ -27,6 +27,27 @@ a:hover {
 }
 
 
+footer {
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    text-align: center;
+    transform: translateX(-50%);
+    font-size: 20px;
+    color: #510202;
+    font-weight: 500;
+    font-family: 'Poppins', sans-serif;
+    letter-spacing: 1px;
+}
+
+footer a {
+    color: #510202;
+    text-decoration: none;
+}
+
+footer:hover {
+    color: #00bc51;
+}
 
 /* Path: style.css */
 
