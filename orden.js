@@ -7,10 +7,21 @@ function sortTable(n) {
     var x = a.getElementsByTagName("TD")[n].innerHTML.toLowerCase();
     var y = b.getElementsByTagName("TD")[n].innerHTML.toLowerCase();
 
+    if (
+      !isNaN(parseFloat(x)) &&
+      isFinite(x) &&
+      !isNaN(parseFloat(y)) &&
+      isFinite(y)
+    ) {
+      // Si los valores son numéricos, comparar como números
+      x = parseFloat(x);
+      y = parseFloat(y);
+    }
+
     if (dir === "asc") {
-      return x.localeCompare(y);
+      return x - y;
     } else {
-      return y.localeCompare(x);
+      return y - x;
     }
   });
 
