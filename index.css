@@ -84,8 +84,8 @@ nav ul li:hover::after {
 #Foto {
     /* foto de perfil */
     position: fixed;
-    top: 5%;
-    left: 48%;
+    top: 15%;
+    left: 50%;
     transform: translateX(-50%);
     box-shadow: 0 0px 1px #ffffff33;
     width: 200px;
