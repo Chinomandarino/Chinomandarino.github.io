@@ -132,3 +132,16 @@ nav ul li:hover::after {
     background: #00bc51;
     color: #fff;
 }
+
+@media (max-width: 400px) and (max-height: 932px) {
+    .caerRapido ul {
+        display: flex;
+        flex-direction: column;
+        top: 80%;
+    }
+
+    #Foto {
+        width: 150px;
+        height: 150px;
+    }
+}
