@@ -1,0 +1,24 @@
+.grid {
+    display: grid;
+    grid: inherit;
+    grid-template-columns: 33% 33% 33%;
+    grid-template-rows: 688%;
+    justify-items: center;
+    align-items: flex-end;
+}
+
+.grid a {
+    text-decoration: none;
+    color: black;
+    font-size: 120%;
+}
+
+
+.grid div {
+    padding: 1em;
+
+}
+
+.grid div:hover {
+    color: gray;
+}
