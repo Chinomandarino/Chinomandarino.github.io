@@ -6,4 +6,4 @@ González Rodríguez Omar
 
 [Whatsapp](https://www.whatsapp.com/)
 
-![Imagen de whatsapp](Chinomandarino.github.io\WhatsApp\image.png)
+![Imagen de whatsapp](WhatsApp\image.png)
