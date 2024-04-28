@@ -4,6 +4,6 @@ González Rodríguez Omar
 
 # Proyecto página web
 
-[Whatsapp](https://www.whatsapp.com/)
+[Bootstrap](https://getbootstrap.com/)
 
-![Imagen de whatsapp](WhatsApp/image.png)
+![Imagen de bootstrap](Bootstrap\imgs\image.png)
