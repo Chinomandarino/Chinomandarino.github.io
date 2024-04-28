@@ -6,4 +6,4 @@ González Rodríguez Omar
 
 [Bootstrap](https://getbootstrap.com/)
 
-![Imagen de bootstrap](Bootstrap\imgs\image.png)
+![Imagen de bootstrap](Bootstrap/imgs/image.png)
