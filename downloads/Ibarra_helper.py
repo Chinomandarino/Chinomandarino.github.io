@@ -6,21 +6,21 @@ from tkinter import filedialog
 
 def renombrar_archivos(directorio, numero_control, apellidos, nombres, grupo, tipo_actividad):
     for nombre_archivo in os.listdir(directorio):
-        nombre_base, extension = os.path.splitext(nombre_archivo)
         try:
-            numero_pagina = int(nombre_base)
+            # Dividir el nombre del archivo en partes
+            numero_actividad, resto = nombre_archivo.split("(")
+            numero_pagina, extension = resto.split(")")
 
-            # Construir el nuevo nombre (ahora con nombre completo)
-            nuevo_nombre = f"{numero_control} {tipo_actividad}{
-                numero_pagina:02d} {apellidos} {nombres} {grupo}{extension}"
+            # Construir el nuevo nombre
+            nuevo_nombre = f"{numero_control} {tipo_actividad}{numero_actividad} 0{
+                numero_pagina} {apellidos} {nombres} {grupo}{extension}"
 
             ruta_antigua = os.path.join(directorio, nombre_archivo)
             ruta_nueva = os.path.join(directorio, nuevo_nombre)
-
             os.rename(ruta_antigua, ruta_nueva)
         except ValueError:
-            label_resultado.configure(
-                text=f"Error: '{nombre_archivo}' no tiene un número de página válido.")
+            label_resultado.configure(text=f"Error: '{
+                                      nombre_archivo}' no tiene un formato válido (actividad(página)).")
 
     label_resultado.configure(text="Archivos renombrados con éxito")
 
@@ -58,8 +58,8 @@ label_instrucciones = ctk.CTkLabel(ventana, text="""
 Instrucciones de como usar ibarra helper:
 
 1. Coloca todos tus archivos en una carpeta.
-2. El nombre de cada archivo debe ser solo el número de página.
-   Ejemplo: 01, 02, etc.
+2. El nombre de cada archivo debe ser el número de actividad y el número de página, separados por paréntesis.
+    Ejemplo: 1(1), 1(2), etc.
 3. Ingresa tu número de control, apellidos, nombres, grupo y selecciona el tipo de actividad.
 4. Selecciona la carpeta con los archivos.
 5. Haz clic en "Renombrar Archivos".
