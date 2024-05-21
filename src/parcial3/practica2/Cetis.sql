@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.5
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Servidor: 127.0.0.1
--- Tiempo de generación: 21-05-2024 a las 03:39:39
--- Versión del servidor: 10.1.39-MariaDB
--- Versión de PHP: 7.3.5
+-- Host: 127.0.0.1
+-- Generation Time: May 21, 2024 at 10:37 AM
+-- Server version: 10.4.32-MariaDB
+-- PHP Version: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -19,81 +18,81 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de datos: `Cetis`
+-- Database: `cetis`
 --
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `alumnos`
+-- Table structure for table `alumnos`
 --
 
 CREATE TABLE `alumnos` (
   `ID` int(11) NOT NULL,
-  `Nombre` varchar(100) COLLATE utf8_bin NOT NULL,
-  `Edad` int(11) NOT NULL,
-  `Grupo` varchar(10) COLLATE utf8_bin NOT NULL
+  `NOMBRE` varchar(100) NOT NULL,
+  `EDAD` int(11) NOT NULL,
+  `GRUPO` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
--- Volcado de datos para la tabla `alumnos`
+-- Dumping data for table `alumnos`
 --
 
-INSERT INTO `alumnos` (`ID`, `Nombre`, `Edad`, `Grupo`) VALUES
+INSERT INTO `alumnos` (`ID`, `NOMBRE`, `EDAD`, `GRUPO`) VALUES
 (1, 'Miguel', 15, '1AV'),
 (2, 'jESUS', 15, '1AV');
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `empleados`
+-- Table structure for table `empleados`
 --
 
 CREATE TABLE `empleados` (
-  `Id` int(11) NOT NULL,
-  `Nombre` varchar(100) COLLATE utf8_bin NOT NULL,
-  `Especialidad` varchar(30) COLLATE utf8_bin NOT NULL
+  `ID` int(11) NOT NULL,
+  `NOMBRE` varchar(100) NOT NULL,
+  `ESPECIALIDAD` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
--- Volcado de datos para la tabla `empleados`
+-- Dumping data for table `empleados`
 --
 
-INSERT INTO `empleados` (`Id`, `Nombre`, `Especialidad`) VALUES
+INSERT INTO `empleados` (`ID`, `NOMBRE`, `ESPECIALIDAD`) VALUES
 (1, 'Luis carlos', 'Programacion'),
 (2, 'Rochin', 'Programacion');
 
 --
--- Índices para tablas volcadas
+-- Indexes for dumped tables
 --
 
 --
--- Indices de la tabla `alumnos`
+-- Indexes for table `alumnos`
 --
 ALTER TABLE `alumnos`
   ADD PRIMARY KEY (`ID`);
 
 --
--- Indices de la tabla `empleados`
+-- Indexes for table `empleados`
 --
 ALTER TABLE `empleados`
-  ADD PRIMARY KEY (`Id`);
+  ADD PRIMARY KEY (`ID`);
 
 --
--- AUTO_INCREMENT de las tablas volcadas
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT de la tabla `alumnos`
+-- AUTO_INCREMENT for table `alumnos`
 --
 ALTER TABLE `alumnos`
   MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT de la tabla `empleados`
+-- AUTO_INCREMENT for table `empleados`
 --
 ALTER TABLE `empleados`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
