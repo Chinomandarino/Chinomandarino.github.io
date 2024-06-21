@@ -3,14 +3,165 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <style>
+            
+            
+            .card-columns {
+              column-count: 3;
+            }
+        
+            .card {
+              margin-bottom: 1rem;
+              break-inside: avoid;
+            }
+        
+            .card img {
+              width: 100%;
+              display: block;
+            }
+        
+            @media (max-width: 992px) {
+              .card-columns {
+                column-count: 2;
+              }
+            }
+        
+            @media (max-width: 768px) {
+              .card-columns {
+                column-count: 1;
+              }
+            }
+          </style>
         <link rel="stylesheet"
             href="/src/bootstrap.css">
         <script src="/node_modules/jquery/dist/jquery.js"></script>
         <title>proyecto final parcial 3</title>
     </head>
-    <body>
+    <body
+        style="background-color: indigo;">
+        <div class="container mt-lg-5">
 
-        <script src="/node_modules/bootstrap/dist/js/bootstrap.js"></script>
+            <div class="card-columns">
+
+                <!-- tarjeta 1 -->
+                <div class="card">
+                    <img src="consulta1.png"
+                        class="card-img-top" alt="SELECT * FROM
+                        alumno">
+                    <div class="card-body">
+                        <h5 class="card-title">Muestra todos los alunos de la
+                            facultad </h5>
+                        <p class="card-text">
+                            <span
+                                id="text1"
+                                class="badge bg-light text-dark">
+                                SELECT * FROM alumno
+                            </span>
+                        </p>
+
+                        <div class="btn-group">
+                            <a href="consulta1.png" class="btn btn-primary">Ver
+                                foto</a>
+                            <a class="btn btn-primary"
+                                data-text-id="text1"
+                                onclick="copyText(this)">Copiar
+                                codigo</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- tarjeta 2 -->
+                <div class="card">
+                    <img src="consulta2.png"
+                        class="card-img-top" alt="Imagen 2">
+                    <div class="card-body">
+                        <h5 class="card-title">Listado de Cursos y sus
+                            Asignaturas Asociadas</h5>
+                        <p class="card-text">
+                            <span
+                                id="text2"
+                                class="badge bg-light text-dark">
+                                SELECT curso.nombreDescriptivo,asignatura.nombre
+                                <br>
+                                FROM curso <br>
+                                INNER JOIN asignatura <br>
+                                ON curso.idCurso = asignatura.curso; <br>
+                            </span>
+                        </p>
+                        <div class="btn-group">
+                            <a href="consulta2.png" class="btn btn-primary">Ver
+                                foto</a>
+                            <a class="btn btn-primary"
+                                data-text-id="text2"
+                                onclick="copyText(this)">Copiar
+                                codigo</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- tarjeta 3-->
+                <div class="card">
+                    <img src="https://via.placeholder.com/300x200"
+                        class="card-img-top" alt="Imagen 3">
+                    <div class="card-body">
+                        <h5 class="card-title">consulta 3</h5>
+                        <p class="card-text">consulta </p>
+                    </div>
+                </div>
+                <!-- tarjeta 4-->
+                <div class="card">
+                    <img src="https://via.placeholder.com/300x200"
+                        class="card-img-top" alt="Imagen 3">
+                    <div class="card-body">
+                        <h5 class="card-title">consulta 4</h5>
+                        <p class="card-text">consulta 4</p>
+                    </div>
+                </div>
+                <!-- tarjeta 5-->
+                <div class="card">
+                    <img src="https://via.placeholder.com/300x200"
+                        class="card-img-top" alt="Imagen 3">
+                    <div class="card-body">
+                        <h5 class="card-title">consulta 5</h5>
+                        <p class="card-text">consulta 5</p>
+                    </div>
+                </div>
+                <!-- tarjeta 6-->
+                <div class="card">
+                    <img src="https://via.placeholder.com/300x200"
+                        class="card-img-top" alt="Imagen 3">
+                    <div class="card-body">
+                        <h5 class="card-title">consulta 6</h5>
+                        <p class="card-text">Constulta 6</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <script>
+        function copyText(button) {
+            // Obtener el ID del texto a copiar desde el atributo data-text-id del botón
+            var textId = button.getAttribute("data-text-id");
+            var text = document.getElementById(textId).textContent;
+
+            // Crear un elemento temporal para copiar el texto
+            var tempElement = document.createElement("textarea");
+            tempElement.value = text;
+            document.body.appendChild(tempElement);
+
+            // Seleccionar el contenido del elemento temporal
+            tempElement.select();
+            tempElement.setSelectionRange(0, 99999); // Para dispositivos móviles
+
+            // Copiar el texto al portapapeles
+            document.execCommand("copy");
+
+            // Eliminar el elemento temporal
+            document.body.removeChild(tempElement);
+
+        }
+    </script>
+
+        <script
+            src="/node_modules/bootstrap/dist/js/bootstrap.js"></script>
     </body>
-
 </html>
