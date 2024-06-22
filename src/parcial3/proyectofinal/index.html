@@ -3,362 +3,388 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Proyecto Final Parcial 3</title>
+        <link rel="stylesheet" href="/src/bootstrap.css">
         <style>
-            
-            
-            .card-columns {
-              column-count: 3;
-            }
-        
-            .card {
-              margin-bottom: 1rem;
-              break-inside: avoid;
-            }
-        
-            .card img {
-              width: 100%;
-              display: block;
-            }
-        
-            @media (max-width: 992px) {
-              .card-columns {
-                column-count: 2;
-              }
-            }
-        
-            @media (max-width: 768px) {
-              .card-columns {
-                column-count: 1;
-              }
-            }
-          </style>
-        <link rel="stylesheet"
-            href="/src/bootstrap.css">
-        <script src="/node_modules/jquery/dist/jquery.js"></script>
-        <title>proyecto final parcial 3</title>
+        .card {
+            margin-bottom: 1rem;
+        }
+
+        .card img {
+            width: 100%;
+            display: block;
+        }
+    </style>
     </head>
-    <body
-        style="background-color: indigo;">
-        <div class="container mt-lg-5">
-
-            <div class="card-columns">
-
-                <!-- tarjeta 1 -->
-                <div class="card">
-                    <img src="consulta1.png"
-                        class="card-img-top" alt="SELECT * FROM
-                        alumno">
-                    <div class="card-body">
-                        <h5 class="card-title">Muestra todos los alunos de la
-                            facultad </h5>
-                        <p class="card-text">
-                            <span
-                                id="text1"
-                                class="badge bg-light text-dark">
-                                SELECT * FROM alumno
-                            </span>
-                        </p>
-
-                        <div class="btn-group">
-                            <a href="consulta1.png" class="btn btn-primary">Ver
-                                foto</a>
-                            <a class="btn btn-primary"
-                                data-text-id="text1"
-                                onclick="copyText(this)">Copiar
-                                codigo</a>
-                        </div>
-                    </div>
-                </div>
-                <!-- tarjeta 2 -->
-                <div class="card">
-                    <img src="consulta2.png"
-                        class="card-img-top" alt="Imagen 2">
-                    <div class="card-body">
-                        <h5 class="card-title">Listado de Cursos y sus
-                            Asignaturas Asociadas</h5>
-                        <p class="card-text">
-                            <span
-                                id="text2"
-                                class="badge bg-light text-dark">
-                                SELECT
-                                curso.nombreDescriptivo,asignatura.nombre<br>
-                                FROM curso <br>
-                                INNER JOIN asignatura <br>
-                                ON curso.idCurso = asignatura.curso; <br>
-                            </span>
-                        </p>
-                        <div class="btn-group">
-                            <a href="consulta2.png" class="btn btn-primary">Ver
-                                foto</a>
-                            <a class="btn btn-primary"
-                                data-text-id="text2"
-                                onclick="copyText(this)">Copiar
-                                codigo</a>
-                        </div>
-                    </div>
-                </div>
-                <!-- tarjeta 3-->
-                <div class="card">
-                    <img src="consulta3.png"
-                        class="card-img-top" alt="Imagen 3">
-                    <div class="card-body">
-                        <h5 class="card-title">Otener listado (NOMBRE Y
-                            APELLIDO) de alumnos que tengan beca</h5>
-                        <p class="card-text">
-                            <span
-                                id="text3"
-                                class="badge bg-light text-dark">
-                                SELECT alumno.nombre, alumno.beca <br>
-                                FROM alumno WHERE beca = 'si';
-
-                            </span>
-                        </p>
-                        <div class="btn-group">
-                            <a href="consulta3.png" class="btn btn-primary">Ver
-                                foto</a>
-                            <a class="btn btn-primary"
-                                data-text-id="text3"
-                                onclick="copyText(this)">Copiar
-                                codigo</a>
-                        </div>
-                    </div>
-                </div>
-                <!-- tarjeta 4-->
-                <div class="card">
-                    <img src="consulta4.png"
-                        class="card-img-top" alt="Imagen 4">
-                    <div class="card-body">
-                        <h5 class="card-title">Obtener listado de profesores, y
-                            su numero de contacto</h5>
-                        <p class="card-text">
-                            <span
-                                id="text4"
-                                class="badge bg-light text-dark">
-                                SELECT <br>
-                                profesor.nombre, profesor.apellido1, <br>
-                                profesor.apellido2, tlfcontactoprof.telefono
-                                <br>
-                                FROM profesor <br>
-                                INNER JOIN tlfcontactoprof <br>
-                                ON profesor.idProfesor =
-                                tlfcontactoprof.idProfesor; <br>
-
-                            </span>
-                        </p>
-                        <div class="btn-group">
-                            <a href="consulta4.png" class="btn btn-primary">Ver
-                                foto</a>
-                            <a class="btn btn-primary"
-                                data-text-id="text4"
-                                onclick="copyText(this)">Copiar
-                                codigo</a>
-                        </div>
-                    </div>
-                </div>
-                <!-- tarjeta 5-->
-                <div class="card">
-                    <img src="consulta5.png"
-                        class="card-img-top" alt="Imagen 5">
-                    <div class="card-body">
-                        <h5 class="card-title">Obtener listado de alumnos (todos
-                            los campos) que estan inscritos a la asignatura de
-                            programacion</h5>
-                        <p class="card-text">
-                            <span
-                                id="text5"
-                                class="badge bg-light text-dark">
-                                SELECT * FROM alumno <br>
-                                INNER JOIN matricula ON alumno.idAlumno =<br>
-                                matricula.idAlumno <br>
-                                INNER JOIN asignatura ON asignatura.idAsignatura
-                                <br>
-                                = matricula.idAsignatura WHERE <br>
-                                asignatura.idAsignatura = 'AS009';
-
-                            </span>
-                        </p>
-                        <div class="btn-group">
-                            <a href="consulta5.png" class="btn btn-primary">Ver
-                                foto</a>
-                            <a class="btn btn-primary"
-                                data-text-id="text5"
-                                onclick="copyText(this)">Copiar
-                                codigo</a>
-                        </div>
-                    </div>
-                </div>
-                <!-- tarjeta 6-->
-                <div class="card">
-                    <img src="consulta6.png"
-                        class="card-img-top" alt="Imagen 6">
-                    <div class="card-body">
-                        <h5 class="card-title">Obtener listado de profesores y
-                            asignaturas que imparten</h5>
-                        <p class="card-text">
-                            <span
-                                id="text6"
-                                class="badge bg-light text-dark">
-                                SELECT profesor.nombre, asignatura.nombre <br>
-                                FROM profesor <br>
-                                INNER JOIN impartir ON profesor.idProfesor =
-                                <br>
-                                impartir.idProfesor <br>
-                                INNER JOIN asignatura ON asignatura.idAsignatura
-                                <br>
-                                = impartir.idAsignatura;
-
-                            </span>
-                        </p>
-                        <div class="btn-group">
-                            <a href="consulta6.png" class="btn btn-primary">Ver
-                                foto</a>
-                            <a class="btn btn-primary"
-                                data-text-id="text6"
-                                onclick="copyText(this)">Copiar
-                                codigo</a>
+    <body style="background-color: indigo;">
+        <div class="container">
+            <div class="row">
+                <!-- Tarjeta 1 -->
+                <div class="col-md-4">
+                    <div class="card">
+                        <h1 class="display-5">Consulta 1</h1>
+                        <img src="consulta1.png" class="card-img-top"
+                            alt="SELECT * FROM alumno">
+                        <div class="card-body">
+                            <h5 class="card-title">Muestra todos los alumnos de
+                                la facultad</h5>
+                            <p class="card-text">
+                                <span id="text1"
+                                    class="badge bg-light text-dark">
+                                    SELECT * FROM alumno
+                                </span>
+                            </p>
+                            <div class="btn-group">
+                                <a href="consulta1.png"
+                                    class="btn btn-primary">Ver foto</a>
+                                <a class="btn btn-primary" data-text-id="text1"
+                                    onclick="copyText(this)">Copiar código</a>
+                            </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- tarjeta 7-->
-                <div class="card">
-                    <img src="consulta7.png"
-                        class="card-img-top" alt="Imagen 7">
-                    <div class="card-body">
-                        <h5 class="card-title">Mostrar la asignatura que tiene
-                            mas alumnos inscritos en total </h5>
-                        <p class="card-text">
-                            <span
-                                id="text7"
-                                class="badge bg-light text-dark">
-                                SELECT asignatura.nombre, <br>
-                                COUNT(matricula.idAlumno) AS total_inscritos
-                                <br>
-                                FROM asignatura <br>
-                                JOIN matricula ON asignatura.idAsignatura = <br>
-                                matricula.idAsignatura <br>
-                                GROUP BY asignatura.nombre <br>
-                                ORDER BY total_inscritos DESC; <br>
-
-                            </span>
-                        </p>
-                        <div class="btn-group">
-                            <a href="consulta7.png" class="btn btn-primary">Ver
-                                foto</a>
-                            <a class="btn btn-primary"
-                                data-text-id="text7"
-                                onclick="copyText(this)">Copiar
-                                codigo</a>
+                <!-- Tarjeta 2 -->
+                <div class="col-md-4">
+                    <div class="card">
+                        <h1 class="display-5">Consulta 2</h1>
+                        <img src="consulta2.png" class="card-img-top"
+                            alt="Imagen 2">
+                        <div class="card-body">
+                            <h5 class="card-title">Listado de Cursos y sus
+                                Asignaturas Asociadas</h5>
+                            <p class="card-text">
+                                <span id="text2"
+                                    class="badge bg-light text-dark">
+                                    SELECT <br>
+                                    curso.nombreDescriptivo,asignatura.nombre<br>
+                                    FROM curso <br>
+                                    INNER JOIN asignatura <br>
+                                    ON curso.idCurso = asignatura.curso; <br>
+                                </span>
+                            </p>
+                            <div class="btn-group">
+                                <a href="consulta2.png"
+                                    class="btn btn-primary">Ver foto</a>
+                                <a class="btn btn-primary" data-text-id="text2"
+                                    onclick="copyText(this)">Copiar código</a>
+                            </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- tarjeta 8-->
-                <div class="card">
-                    <img src="https://via.placeholder.com/300x200"
-                        class="card-img-top" alt="Imagen 8">
-                    <div class="card-body">
-                        <h5 class="card-title">Obtener listado de alumnos que
-                            les da la clase el profesor con ID PR048 (josé
-                            manuel), sin importar en que asignatura esten
-                            inscrito </h5>
-                        <p class="card-text">
-                            <span
-                                id="text8"
-                                class="badge bg-light text-dark">
-
-                            </span>
-                        </p>
-                        <div class="btn-group">
-                            <a href="#" class="btn btn-primary">Ver
-                                foto</a>
-                            <a class="btn btn-primary"
-                                data-text-id="text8"
-                                onclick="copyText(this)">Copiar
-                                codigo</a>
+                <!-- Tarjeta 3 -->
+                <div class="col-md-4">
+                    <div class="card">
+                        <h1 class="display-5">Consulta 3</h1>
+                        <img src="consulta3.png" class="card-img-top"
+                            alt="Imagen 3">
+                        <div class="card-body">
+                            <h5 class="card-title">Obtener listado (NOMBRE Y
+                                APELLIDO) de alumnos que tengan beca</h5>
+                            <p class="card-text">
+                                <span id="text3"
+                                    class="badge bg-light text-dark">
+                                    SELECT alumno.nombre, alumno.beca <br>
+                                    FROM alumno WHERE beca = 'si';
+                                </span>
+                            </p>
+                            <div class="btn-group">
+                                <a href="consulta3.png"
+                                    class="btn btn-primary">Ver foto</a>
+                                <a class="btn btn-primary" data-text-id="text3"
+                                    onclick="copyText(this)">Copiar código</a>
+                            </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- tarjeta 9-->
-                <div class="card">
-                    <img src="https://via.placeholder.com/300x200"
-                        class="card-img-top" alt="Imagen 9">
-                    <div class="card-body">
-                        <h5 class="card-title">Obtener listado de cursos, con
-                            asignatura, y el maestro que las imparte </h5>
-                        <p class="card-text">
-                            <span
-                                id="text9"
-                                class="badge bg-light text-dark">
-
-                            </span>
-                        </p>
-                        <div class="btn-group">
-                            <a href="#" class="btn btn-primary">Ver
-                                foto</a>
-                            <a class="btn btn-primary"
-                                data-text-id="text9"
-                                onclick="copyText(this)">Copiar
-                                codigo</a>
+                <!-- Tarjeta 4 -->
+                <div class="col-md-4">
+                    <div class="card">
+                        <h1 class="display-5">Consulta 4</h1>
+                        <img src="consulta4.png" class="card-img-top"
+                            alt="Imagen 4">
+                        <div class="card-body">
+                            <h5 class="card-title">Obtener listado de
+                                profesores, y su número de contacto</h5>
+                            <p class="card-text">
+                                <span id="text4"
+                                    class="badge bg-light text-dark">
+                                    SELECT <br>
+                                    profesor.nombre, profesor.apellido1, <br>
+                                    profesor.apellido2, tlfcontactoprof.telefono
+                                    <br>
+                                    FROM profesor <br>
+                                    INNER JOIN tlfcontactoprof <br>
+                                    ON profesor.idProfesor =
+                                    tlfcontactoprof.idProfesor; <br>
+                                </span>
+                            </p>
+                            <div class="btn-group">
+                                <a href="consulta4.png"
+                                    class="btn btn-primary">Ver foto</a>
+                                <a class="btn btn-primary" data-text-id="text4"
+                                    onclick="copyText(this)">Copiar código</a>
+                            </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- tarjeta 10-->
-                <div class="card">
-                    <img src="https://via.placeholder.com/300x200"
-                        class="card-img-top" alt="Imagen 10">
-                    <div class="card-body">
-                        <h5 class="card-title">Obtener listado de alumnos, con
-                            asignaturas que cursa, profesor que las imparte y al
-                            curso que pertenece </h5>
-                        <p class="card-text">
-                            <span
-                                id="text10"
-                                class="badge bg-light text-dark">
-
-                            </span>
-                        </p>
-                        <div class="btn-group">
-                            <a href="#" class="btn btn-primary">Ver
-                                foto</a>
-                            <a class="btn btn-primary"
-                                data-text-id="text10"
-                                onclick="copyText(this)">Copiar
-                                codigo</a>
+                <!-- Tarjeta 5 -->
+                <div class="col-md-4">
+                    <div class="card">
+                        <h1 class="display-5">Consulta 5</h1>
+                        <img src="consulta5.png" class="card-img-top"
+                            alt="Imagen 5">
+                        <div class="card-body">
+                            <h5 class="card-title">Obtener listado de alumnos
+                                (todos los campos) que están inscritos a la
+                                asignatura de programación</h5>
+                            <p class="card-text">
+                                <span id="text5"
+                                    class="badge bg-light text-dark">
+                                    SELECT * FROM alumno <br>
+                                    INNER JOIN matricula ON alumno.idAlumno
+                                    =<br>
+                                    matricula.idAlumno <br>
+                                    INNER JOIN asignatura ON
+                                    asignatura.idAsignatura
+                                    <br>
+                                    = matricula.idAsignatura WHERE <br>
+                                    asignatura.idAsignatura = 'AS009';
+                                </span>
+                            </p>
+                            <div class="btn-group">
+                                <a href="consulta5.png"
+                                    class="btn btn-primary">Ver foto</a>
+                                <a class="btn btn-primary" data-text-id="text5"
+                                    onclick="copyText(this)">Copiar código</a>
+                            </div>
                         </div>
                     </div>
                 </div>
 
+                <!-- Tarjeta 6 -->
+                <div class="col-md-4">
+                    <div class="card">
+                        <h1 class="display-5">Consulta 6</h1>
+                        <img src="consulta6.png" class="card-img-top"
+                            alt="Imagen 6">
+                        <div class="card-body">
+                            <h5 class="card-title">Obtener listado de profesores
+                                y asignaturas que imparten</h5>
+                            <p class="card-text">
+                                <span id="text6"
+                                    class="badge bg-light text-dark">
+                                    SELECT profesor.nombre, asignatura.nombre
+                                    <br>
+                                    FROM profesor <br>
+                                    INNER JOIN impartir ON profesor.idProfesor =
+                                    <br>
+                                    impartir.idProfesor <br>
+                                    INNER JOIN asignatura ON
+                                    asignatura.idAsignatura <br>
+                                    = impartir.idAsignatura;
+                                </span>
+                            </p>
+                            <div class="btn-group">
+                                <a href="consulta6.png"
+                                    class="btn btn-primary">Ver foto</a>
+                                <a class="btn btn-primary" data-text-id="text6"
+                                    onclick="copyText(this)">Copiar código</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tarjeta 7 -->
+                <div class="col-md-4">
+                    <div class="card">
+                        <h1 class="display-5">Consulta 7</h1>
+                        <img src="consulta7.png" class="card-img-top"
+                            alt="Imagen 7">
+                        <div class="card-body">
+                            <h5 class="card-title">Mostrar la asignatura que
+                                tiene más alumnos inscritos en total</h5>
+                            <p class="card-text">
+                                <span id="text7"
+                                    class="badge bg-light text-dark">
+                                    SELECT asignatura.nombre, <br>
+                                    COUNT(matricula.idAlumno) AS total_inscritos
+                                    <br>
+                                    FROM asignatura <br>
+                                    JOIN matricula ON asignatura.idAsignatura =
+                                    <br>
+                                    matricula.idAsignatura <br>
+                                    GROUP BY asignatura.nombre <br>
+                                    ORDER BY total_inscritos DESC; <br>
+                                </span>
+                            </p>
+                            <div class="btn-group">
+                                <a href="consulta7.png"
+                                    class="btn btn-primary">Ver foto</a>
+                                <a class="btn btn-primary" data-text-id="text7"
+                                    onclick="copyText(this)">Copiar código</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tarjeta 8 -->
+                <div class="col-md-4">
+                    <div class="card">
+                        <h1 class="display-5">Consulta 8</h1>
+                        <img src="consulta8.png" class="card-img-top"
+                            alt="Imagen 8">
+                        <div class="card-body">
+                            <h5 class="card-title">Obtener listado de alumnos
+                                que les da la clase el profesor con ID PR048
+                                (José Manuel), sin importar en qué
+                                asignatura</h5>
+                            <p class="card-text">
+                                <span id="text8"
+                                    class="badge bg-light text-dark">
+                                    SELECT <br>
+                                    alumno.idAlumno, <br>
+                                    alumno.nombre, <br>
+                                    alumno.apellido1, <br>
+                                    alumno.apellido2 <br>
+                                    FROM alumno <br>
+                                    JOIN matricula ON alumno.idAlumno = <br>
+                                    matricula.idAlumno <br>
+                                    JOIN impartir ON matricula.idAsignatura <br>
+                                    =
+                                    impartir.idAsignatura <br>
+                                    WHERE impartir.idProfesor = 'PR048';
+                                </span>
+                            </p>
+                            <div class="btn-group">
+                                <a href="consulta8.png"
+                                    class="btn btn-primary">Ver foto</a>
+                                <a class="btn btn-primary" data-text-id="text8"
+                                    onclick="copyText(this)">Copiar código</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tarjeta 9 -->
+                <div class="col-md-4">
+                    <div class="card">
+                        <h1 class="display-5">Consulta 9</h1>
+                        <img src="consulta9.png" class="card-img-top"
+                            alt="Imagen 9">
+                        <div class="card-body">
+                            <h5 class="card-title">Obtener listado de cursos,
+                                con asignatura, y el maestro que las
+                                imparte</h5>
+                            <p class="card-text">
+                                <span id="text9"
+                                    class="badge bg-light text-dark">
+                                    SELECT <br>
+                                    curso.idCurso, <br>
+                                    curso.nombreDescriptivo AS nombreCurso, <br>
+                                    asignatura.idAsignatura, <br>
+                                    asignatura.nombre AS nombreAsignatura, <br>
+                                    profesor.idProfesor, <br>
+                                    profesor.nombre AS nombreProfesor, <br>
+                                    profesor.apellido1, <br>
+                                    profesor.apellido2 <br>
+                                    FROM curso <br>
+                                    JOIN asignatura ON curso.idCurso = <br>
+                                    asignatura.curso <br>
+                                    JOIN impartir ON asignatura.idAsignatura =
+                                    <br>
+                                    impartir.idAsignatura <br>
+                                    JOIN profesor ON impartir.idProfesor = <br>
+                                    profesor.idProfesor;
+                                </span>
+                            </p>
+                            <div class="btn-group">
+                                <a href="consulta9.png"
+                                    class="btn btn-primary">Ver foto</a>
+                                <a class="btn btn-primary" data-text-id="text9"
+                                    onclick="copyText(this)">Copiar código</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tarjeta 10 -->
+                <div class="col-md-4">
+                    <div class="card">
+                        <h1 class="display-5">Consulta 10</h1>
+                        <img src="consulta10.png" class="card-img-top"
+                            alt="Imagen 10">
+                        <div class="card-body">
+                            <h5 class="card-title">Obtener listado de alumnos,
+                                con asignaturas que cursa, profesor que las
+                                imparte y al curso que pertenece</h5>
+                            <p class="card-text">
+                                <span id="text10"
+                                    class="badge bg-light text-dark">
+                                    SELECT <br>
+                                    alumno.idAlumno, <br>
+                                    alumno.nombre AS nombreAlumno, <br>
+                                    alumno.apellido1, <br>
+                                    alumno.apellido2, <br>
+                                    asignatura.idAsignatura, <br>
+                                    asignatura.nombre AS nombreAsignatura, <br>
+                                    profesor.idProfesor, <br>
+                                    profesor.nombre AS nombreProfesor, <br>
+                                    profesor.apellido1 AS apellidoProfesor1,
+                                    <br>
+                                    profesor.apellido2 AS apellidoProfesor2,
+                                    <br>
+                                    curso.idCurso, <br>
+                                    curso.nombreDescriptivo AS nombreCurso <br>
+                                    FROM alumno <br>
+                                    JOIN matricula ON alumno.idAlumno = <br>
+                                    matricula.idAlumno <br>
+                                    JOIN asignatura ON matricula.idAsignatura =
+                                    <br>
+                                    asignatura.idAsignatura <br>
+                                    JOIN impartir ON asignatura.idAsignatura =
+                                    <br>
+                                    impartir.idAsignatura <br>
+                                    JOIN profesor ON impartir.idProfesor = <br>
+                                    profesor.idProfesor <br>
+                                    JOIN curso ON asignatura.curso =
+                                    curso.idCurso;
+                                </span>
+                            </p>
+                            <div class="btn-group">
+                                <a href="consulta10.png"
+                                    class="btn btn-primary">Ver foto</a>
+                                <a class="btn btn-primary" data-text-id="text10"
+                                    onclick="copyText(this)">Copiar código</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
         <script>
         function copyText(button) {
-            // Obtener el ID del texto a copiar desde el atributo data-text-id del botón
             var textId = button.getAttribute("data-text-id");
             var text = document.getElementById(textId).textContent;
 
-            // Crear un elemento temporal para copiar el texto
             var tempElement = document.createElement("textarea");
             tempElement.value = text;
             document.body.appendChild(tempElement);
 
-            // Seleccionar el contenido del elemento temporal
             tempElement.select();
             tempElement.setSelectionRange(0, 99999); // Para dispositivos móviles
 
-            // Copiar el texto al portapapeles
             document.execCommand("copy");
 
-            // Eliminar el elemento temporal
             document.body.removeChild(tempElement);
-
         }
     </script>
 
-        <script
-            src="/node_modules/bootstrap/dist/js/bootstrap.js"></script>
+        <script src="/node_modules/jquery/dist/jquery.js"></script>
+        <script src="/node_modules/bootstrap/dist/js/bootstrap.js"></script>
     </body>
 </html>
