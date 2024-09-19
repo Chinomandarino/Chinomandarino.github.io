@@ -1,33 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Formulario PHP</title>
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
-  </head>
-  <body class="bg-gray-100 flex items-center justify-center h-screen">
-    <div class="bg-white p-8 rounded shadow-md w-96">
-      <h1 class="text-2xl font-bold mb-6 text-center">Formulario PHP</h1>
-      <form action="practica1.php" method="get" class="space-y-4">
-        <div>
-          <label for="nombre" class="block text-sm font-medium text-gray-700">Nombre</label>
-          <input type="text" name="nombre" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" required />
-        </div>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Formulario PHP</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+</head>
+<body class="bg-gray-100 flex items-center justify-center h-screen">
+  <div class="bg-white p-12 rounded-lg shadow-lg w-full max-w-3xl">
+    <h1 class="text-3xl font-bold mb-8 text-center text-gray-900">Formulario PHP</h1>
+    <form action="practica1.php" method="get" class="space-y-6">
+      <div>
+        <label for="nombre" class="block text-lg font-medium text-gray-700">Nombre</label>
+        <input
+          type="text"
+          name="nombre"
+          id="nombre"
+          class="mt-2 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-lg"
+          required
+        />
+      </div>
 
-        <div>
-          <label for="edad" class="block text-sm font-medium text-gray-700">Edad</label>
-          <input type="number" name="edad" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" required />
-        </div>
+      <div>
+        <label for="edad" class="block text-lg font-medium text-gray-700">Edad</label>
+        <input
+          type="number"
+          name="edad"
+          id="edad"
+          class="mt-2 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-lg"
+          required
+        />
+      </div>
 
-        <div>
-          <label for="escuela" class="block text-sm font-medium text-gray-700">Escuela</label>
-          <input type="text" name="escuela" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" required />
-        </div>
+      <div>
+        <label for="escuela" class="block text-lg font-medium text-gray-700">Escuela</label>
+        <input
+          type="text"
+          name="escuela"
+          id="escuela"
+          class="mt-2 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-lg"
+          required
+        />
+      </div>
 
-        <hr class="my-4" />
-        <input type="submit" value="Mandar" class="w-full py-2 px-4 bg-blue-600 text-white font-semibold rounded-md shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-indigo-500" />
-      </form>
-    </div>
-  </body>
+      <hr class="my-8 border-gray-300" />
+      <input
+        type="submit"
+        value="Mandar"
+        class="w-full py-3 px-6 bg-blue-600 text-white font-semibold rounded-md shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 text-lg"
+      />
+    </form>
+  </div>
+</body>
 </html>

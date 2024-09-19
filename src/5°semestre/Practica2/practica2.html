@@ -33,6 +33,7 @@
             <label class="block text-gray-700 font-medium mb-2">Fecha:</label>
             <input
               type="date"
+              id="fecha"
               name="fecha"
               class="w-full p-2 border border-gray-300 rounded-md"
             />
@@ -233,5 +234,13 @@
         </table>
       </form>
     </div>
+
+    <script>
+      // Establecer la fecha actual en el campo de fecha
+      document.addEventListener("DOMContentLoaded", function () {
+        var today = new Date().toISOString().split("T")[0];
+        document.getElementById("fecha").value = today;
+      });
+    </script>
   </body>
 </html>

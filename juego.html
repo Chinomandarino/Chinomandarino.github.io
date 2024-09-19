@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Juego del Gato</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      .cell {
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 2rem;
+        font-weight: bold;
+        transition: background-color 0.3s, transform 0.3s;
+      }
+      .cell:hover {
+        background-color: #f0f0f0;
+        transform: scale(1.05);
+      }
+      .cell.X {
+        color: #f56565;
+      }
+      .cell.O {
+        color: #68d391;
+      }
+      .board {
+        border: 2px solid #e2e8f0;
+        border-radius: 0.375rem;
+      }
+      .difficulty-list {
+        list-style-type: none;
+        padding: 0;
+        margin-left: 2rem;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .difficulty-item {
+        margin-bottom: 0.5rem;
+      }
+      .difficulty-button {
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border: 2px solid #e2e8f0;
+        border-radius: 0.375rem;
+        padding: 0.5rem;
+        font-size: 1.25rem;
+        font-weight: bold;
+        transition: background-color 0.3s, transform 0.3s;
+        background-color: white;
+      }
+      .difficulty-button:hover {
+        background-color: #f0f0f0;
+        transform: scale(1.05);
+      }
+      .difficulty-button.selected {
+        background-color: #68d391;
+        color: white;
+        border-color: #68d391;
+      }
+      .star {
+        font-size: 1.5rem;
+      }
+    </style>
+  </head>
+  <body
+    class="flex flex-col items-center justify-center min-h-screen bg-gray-100 font-sans"
+  >
+    <h1 class="text-3xl font-bold mb-6">Juego del Gato</h1>
+    <div class="flex">
+      <div class="bg-white p-6 rounded-lg shadow-md">
+        <div id="message" class="text-xl font-bold mb-4"></div>
+        <div id="board" class="grid grid-cols-3 gap-2 mb-4 board">
+          <div class="cell w-20 h-20 border border-gray-300 rounded-md"></div>
+          <div class="cell w-20 h-20 border border-gray-300 rounded-md"></div>
+          <div class="cell w-20 h-20 border border-gray-300 rounded-md"></div>
+          <div class="cell w-20 h-20 border border-gray-300 rounded-md"></div>
+          <div class="cell w-20 h-20 border border-gray-300 rounded-md"></div>
+          <div class="cell w-20 h-20 border border-gray-300 rounded-md"></div>
+          <div class="cell w-20 h-20 border border-gray-300 rounded-md"></div>
+          <div class="cell w-20 h-20 border border-gray-300 rounded-md"></div>
+          <div class="cell w-20 h-20 border border-gray-300 rounded-md"></div>
+        </div>
+        <button
+          type="button"
+          id="reset"
+          class="mt-4 px-4 py-2 bg-gray-500 text-white font-bold rounded-md shadow-md hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-gray-500"
+        >
+          Reiniciar Juego
+        </button>
+        <div class="mt-4 text-lg">
+          <div>Victorias: <span id="wins">0</span></div>
+          <div>Derrotas: <span id="losses">0</span></div>
+        </div>
+      </div>
+      <ul class="difficulty-list">
+        <li class="difficulty-item">
+          <button data-difficulty="1" class="difficulty-button star">⭐</button>
+        </li>
+        <li class="difficulty-item">
+          <button data-difficulty="2" class="difficulty-button star">
+            ⭐⭐
+          </button>
+        </li>
+        <li class="difficulty-item">
+          <button data-difficulty="3" class="difficulty-button star">
+            ⭐⭐⭐
+          </button>
+        </li>
+        <li class="difficulty-item">
+          <button data-difficulty="4" class="difficulty-button star">
+            ⭐⭐⭐⭐
+          </button>
+        </li>
+        <li class="difficulty-item">
+          <button data-difficulty="5" class="difficulty-button star">
+            ⭐⭐⭐⭐⭐
+          </button>
+        </li>
+      </ul>
+    </div>
+
+    <script>
+      const board = document.getElementById("board");
+      const cells = document.querySelectorAll(".cell");
+      const message = document.getElementById("message");
+      const difficultyButtons = document.querySelectorAll(".difficulty-button");
+      const winsElement = document.getElementById("wins");
+      const lossesElement = document.getElementById("losses");
+      let currentPlayer = "X";
+      let gameActive = true;
+      let botPlayer = "O";
+      let botDifficulty = 1;
+      let wins = 0;
+      let losses = 0;
+
+      const winningCombinations = [
+        [0, 1, 2],
+        [3, 4, 5],
+        [6, 7, 8],
+        [0, 3, 6],
+        [1, 4, 7],
+        [2, 5, 8],
+        [0, 4, 8],
+        [2, 4, 6],
+      ];
+
+      board.addEventListener("click", (event) => {
+        if (!gameActive) return;
+        if (
+          event.target.classList.contains("cell") &&
+          !event.target.textContent
+        ) {
+          event.target.textContent = currentPlayer;
+          event.target.classList.add(currentPlayer);
+          console.log(`Player ${currentPlayer} played`);
+          checkWinner();
+          if (currentPlayer === "X") {
+            currentPlayer = "O";
+            setTimeout(() => botMove(), 100); // Añadido timeout para visualización del movimiento
+          } else {
+            currentPlayer = "X";
+          }
+        }
+      });
+
+      function checkWinner() {
+        const cellValues = Array.from(cells).map((cell) => cell.textContent);
+
+        for (let combination of winningCombinations) {
+          const [a, b, c] = combination;
+          if (
+            cellValues[a] &&
+            cellValues[a] === cellValues[b] &&
+            cellValues[a] === cellValues[c]
+          ) {
+            gameActive = false;
+            if (cellValues[a] === "X") {
+              message.textContent = "¡El humano ha ganado!";
+              console.log("El humano ha ganado");
+              wins++;
+              winsElement.textContent = wins;
+            } else {
+              message.textContent = "¡El bot ha ganado!";
+              console.log("El bot ha ganado");
+              losses++;
+              lossesElement.textContent = losses;
+            }
+            return;
+          }
+        }
+
+        if (cellValues.every((cell) => cell)) {
+          gameActive = false;
+          message.textContent = "¡Es un empate!";
+          console.log("Empate");
+        }
+      }
+
+      function botMove() {
+        if (!gameActive) return;
+
+        let move;
+        if (botDifficulty === 1) {
+          move = getRandomMove();
+        } else if (botDifficulty === 2) {
+          move = getMediumMove();
+        } else if (botDifficulty === 3) {
+          move = getMediumMove(); // Implementar mejor lógica para nivel 3 si se desea
+        } else if (botDifficulty === 4) {
+          move = getAdvancedMove(); // Implementar mejor lógica para nivel 4 si se desea
+        } else if (botDifficulty === 5) {
+          move = getHardMove();
+        }
+
+        if (move !== undefined) {
+          cells[move].textContent = botPlayer;
+          cells[move].classList.add(botPlayer);
+          console.log(`Bot ${botPlayer} played at position ${move}`);
+          checkWinner();
+          currentPlayer = "X";
+        }
+      }
+
+      function getRandomMove() {
+        const emptyCells = Array.from(cells).filter(
+          (cell) => !cell.textContent
+        );
+        const randomCell =
+          emptyCells[Math.floor(Math.random() * emptyCells.length)];
+        return Array.from(cells).indexOf(randomCell);
+      }
+
+      function getMediumMove() {
+        const cellValues = Array.from(cells).map((cell) => cell.textContent);
+        for (let combination of winningCombinations) {
+          const [a, b, c] = combination;
+          if (
+            cellValues[a] === botPlayer &&
+            cellValues[b] === botPlayer &&
+            !cellValues[c]
+          ) {
+            return c;
+          }
+          if (
+            cellValues[b] === botPlayer &&
+            cellValues[c] === botPlayer &&
+            !cellValues[a]
+          ) {
+            return a;
+          }
+          if (
+            cellValues[a] === botPlayer &&
+            cellValues[c] === botPlayer &&
+            !cellValues[b]
+          ) {
+            return b;
+          }
+        }
+        for (let combination of winningCombinations) {
+          const [a, b, c] = combination;
+          if (
+            cellValues[a] === "X" &&
+            cellValues[b] === "X" &&
+            !cellValues[c]
+          ) {
+            return c;
+          }
+          if (
+            cellValues[b] === "X" &&
+            cellValues[c] === "X" &&
+            !cellValues[a]
+          ) {
+            return a;
+          }
+          if (
+            cellValues[a] === "X" &&
+            cellValues[c] === "X" &&
+            !cellValues[b]
+          ) {
+            return b;
+          }
+        }
+        return getRandomMove();
+      }
+
+      function getAdvancedMove() {
+        return minimax(
+          Array.from(cells).map((cell) => cell.textContent),
+          botPlayer
+        ).index;
+      }
+
+      function getHardMove() {
+        return getAdvancedMove();
+      }
+
+      function minimax(board, player) {
+        const availableSpots = board
+          .map((value, index) => (!value ? index : null))
+          .filter((index) => index !== null);
+        if (checkWin(board, "X")) return { score: -10 };
+        if (checkWin(board, "O")) return { score: 10 };
+        if (availableSpots.length === 0) return { score: 0 };
+
+        const moves = [];
+        for (let spot of availableSpots) {
+          const newBoard = board.slice();
+          newBoard[spot] = player;
+          const result = minimax(newBoard, player === "O" ? "X" : "O");
+          moves.push({ index: spot, score: result.score });
+        }
+
+        let bestMove;
+        if (player === "O") {
+          let bestScore = -Infinity;
+          for (let move of moves) {
+            if (move.score > bestScore) {
+              bestScore = move.score;
+              bestMove = move;
+            }
+          }
+        } else {
+          let bestScore = Infinity;
+          for (let move of moves) {
+            if (move.score < bestScore) {
+              bestScore = move.score;
+              bestMove = move;
+            }
+          }
+        }
+        return bestMove;
+      }
+
+      function checkWin(board, player) {
+        for (let combination of winningCombinations) {
+          const [a, b, c] = combination;
+          if (
+            board[a] === player &&
+            board[a] === board[b] &&
+            board[a] === board[c]
+          ) {
+            return true;
+          }
+        }
+        return false;
+      }
+
+      document.getElementById("reset").addEventListener("click", () => {
+        cells.forEach((cell) => {
+          cell.textContent = "";
+          cell.classList.remove("X", "O");
+        });
+        message.textContent = "";
+        currentPlayer = "X";
+        gameActive = true;
+      });
+
+      difficultyButtons.forEach((button) => {
+        button.addEventListener("click", () => {
+          difficultyButtons.forEach((btn) => btn.classList.remove("selected"));
+          button.classList.add("selected");
+          botDifficulty = parseInt(button.dataset.difficulty);
+        });
+      });
+    </script>
+  </body>
+</html>
