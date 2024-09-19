@@ -1,70 +1,237 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Practica 2</title>
-    <style>
-        table tr td{
-            padding: 10px;
-        }
-    </style>
-</head>
-<body>
-    <h1>Formulario de Registro de calificaciones</h1><hr>
-    <form action="practica2.php" method="POST">
-        <label for="">Nombre del Alumno:</label>
-        <input type="text" name="nombre" value="González Rodríguez Omar">&nbsp;
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body class="bg-gray-100 p-10">
+    <div class="max-w-3xl mx-auto bg-white p-8 rounded-lg shadow-lg">
+      <h1 class="text-2xl font-bold mb-6">
+        Formulario de Registro de Calificaciones
+      </h1>
+      <hr class="mb-6" />
+      <form action="practica2.php" method="POST">
+        <div class="mb-4">
+          <label class="block text-gray-700 font-medium mb-2"
+            >Nombre del Alumno:</label
+          >
+          <input
+            type="text"
+            name="nombre"
+            value="González Rodríguez Omar"
+            class="w-full p-2 border border-gray-300 rounded-md"
+          />
+        </div>
 
-        <label for="">Fecha:</label>
-        <input type="date" name="fecha">&nbsp;
+        <div class="grid grid-cols-2 gap-4 mb-4">
+          <div>
+            <label class="block text-gray-700 font-medium mb-2">Fecha:</label>
+            <input
+              type="date"
+              name="fecha"
+              class="w-full p-2 border border-gray-300 rounded-md"
+            />
+          </div>
+          <div>
+            <label class="block text-gray-700 font-medium mb-2"
+              >Num. Control:</label
+            >
+            <input
+              type="text"
+              value="22325061070493"
+              name="num_control"
+              class="w-full p-2 border border-gray-300 rounded-md"
+            />
+          </div>
+        </div>
 
-        <label for="">Num. Control</label>
-        <input type="text" value="22325061070493" name="num_control">&nbsp;
-
-        <h2>Captura las calificaciones</h2>
-        <table border="1">
+        <h2 class="text-xl font-semibold mb-4">Captura las calificaciones</h2>
+        <table
+          class="min-w-full table-auto bg-white border border-gray-300 rounded-md"
+        >
+          <thead>
+            <tr
+              class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal"
+            >
+              <th class="py-3 px-6">Materia</th>
+              <th class="py-3 px-6">Calificación</th>
+              <th class="py-3 px-6">Maestro</th>
+            </tr>
+          </thead>
+          <tbody>
             <tr>
-                <td>Materia</td>
-                <td>Calificación</td>
-                <td>Maestro</td>
+              <td class="py-3 px-6">
+                <input
+                  type="text"
+                  name="materias[]"
+                  value="Física"
+                  class="w-full p-2 border border-gray-300 rounded-md"
+                />
+              </td>
+              <td class="py-3 px-6">
+                <input
+                  type="number"
+                  name="calificaciones[]"
+                  value="10"
+                  class="w-full p-2 border border-gray-300 rounded-md"
+                />
+              </td>
+              <td class="py-3 px-6">
+                <input
+                  type="text"
+                  name="maestros[]"
+                  value="Marisela García Alvarez"
+                  class="w-full p-2 border border-gray-300 rounded-md"
+                />
+              </td>
             </tr>
             <tr>
-                <td><input type="text" name="materias[]" value="Física"></td>
-                <td><input type="number" name="calificaciones[]" value="10"></td>
-                <td><input type="text" name="maestros[]" value="Marisela García Alvarez"></td>
+              <td class="py-3 px-6">
+                <input
+                  type="text"
+                  name="materias[]"
+                  value="Desarrolla aplicaciones web con conexión a BD"
+                  class="w-full p-2 border border-gray-300 rounded-md"
+                />
+              </td>
+              <td class="py-3 px-6">
+                <input
+                  type="number"
+                  name="calificaciones[]"
+                  value="10"
+                  class="w-full p-2 border border-gray-300 rounded-md"
+                />
+              </td>
+              <td class="py-3 px-6">
+                <input
+                  type="text"
+                  name="maestros[]"
+                  value="Jorge Ibarra"
+                  class="w-full p-2 border border-gray-300 rounded-md"
+                />
+              </td>
             </tr>
             <tr>
-                <td><input type="text" name="materias[]" value="Desarrolla aplicaciones web con conexión a BD"></td>
-                <td><input type="number" name="calificaciones[]" value="10"></td>
-                <td><input type="text" name="maestros[]" value="Jorge Ibarra"></td>
+              <td class="py-3 px-6">
+                <input
+                  type="text"
+                  name="materias[]"
+                  value="Cálculo integral"
+                  class="w-full p-2 border border-gray-300 rounded-md"
+                />
+              </td>
+              <td class="py-3 px-6">
+                <input
+                  type="number"
+                  name="calificaciones[]"
+                  value="10"
+                  class="w-full p-2 border border-gray-300 rounded-md"
+                />
+              </td>
+              <td class="py-3 px-6">
+                <input
+                  type="text"
+                  name="maestros[]"
+                  value="Ulises Gallardo"
+                  class="w-full p-2 border border-gray-300 rounded-md"
+                />
+              </td>
             </tr>
             <tr>
-                <td><input type="text" name="materias[]" value="Cálculo integral"></td>
-                <td><input type="number" name="calificaciones[]" value="10"></td>
-                <td><input type="text" name="maestros[]" value="Ulises Gallardo"></td>
+              <td class="py-3 px-6">
+                <input
+                  type="text"
+                  name="materias[]"
+                  value="Inglés"
+                  class="w-full p-2 border border-gray-300 rounded-md"
+                />
+              </td>
+              <td class="py-3 px-6">
+                <input
+                  type="number"
+                  name="calificaciones[]"
+                  value="10"
+                  class="w-full p-2 border border-gray-300 rounded-md"
+                />
+              </td>
+              <td class="py-3 px-6">
+                <input
+                  type="text"
+                  name="maestros[]"
+                  value="David Franco"
+                  class="w-full p-2 border border-gray-300 rounded-md"
+                />
+              </td>
             </tr>
             <tr>
-                <td><input type="text" name="materias[]" value="Inglés"></td>
-                <td><input type="number" name="calificaciones[]" value="10"></td>
-                <td><input type="text" name="maestros[]" value="David Franco"></td>
+              <td class="py-3 px-6">
+                <input
+                  type="text"
+                  name="materias[]"
+                  value="CSyV"
+                  class="w-full p-2 border border-gray-300 rounded-md"
+                />
+              </td>
+              <td class="py-3 px-6">
+                <input
+                  type="number"
+                  name="calificaciones[]"
+                  value="10"
+                  class="w-full p-2 border border-gray-300 rounded-md"
+                />
+              </td>
+              <td class="py-3 px-6">
+                <input
+                  type="text"
+                  name="maestros[]"
+                  value="Lourdes Zuñiga"
+                  class="w-full p-2 border border-gray-300 rounded-md"
+                />
+              </td>
             </tr>
             <tr>
-                <td><input type="text" name="materias[]" value="CSyV"></td>
-                <td><input type="number" name="calificaciones[]" value="10"></td>
-                <td><input type="text" name="maestros[]" value="Lourdes Zuñiga"></td>
+              <td class="py-3 px-6">
+                <input
+                  type="text"
+                  name="materias[]"
+                  value="Construye base de datos para aplicaciones Web"
+                  class="w-full p-2 border border-gray-300 rounded-md"
+                />
+              </td>
+              <td class="py-3 px-6">
+                <input
+                  type="number"
+                  name="calificaciones[]"
+                  value="10"
+                  class="w-full p-2 border border-gray-300 rounded-md"
+                />
+              </td>
+              <td class="py-3 px-6">
+                <input
+                  type="text"
+                  name="maestros[]"
+                  value="Luis Santillan"
+                  class="w-full p-2 border border-gray-300 rounded-md"
+                />
+              </td>
             </tr>
             <tr>
-                <td><input type="text" name="materias[]" value="Construye base de datos para aplicaciones Web"></td>
-                <td><input type="number" name="calificaciones[]" value="10"></td>
-                <td><input type="text" name="maestros[]" value="Luis Santillan"></td>
+              <td colspan="3" class="py-3 px-6 text-center">
+                <input
+                  type="submit"
+                  value="Imprimir boleta"
+                  class="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600"
+                />
+              </td>
             </tr>
-            <tr>
-                <td colspan="3">
-                    <input type="submit" value="Imprimir boleta">
-                </td>
-            </tr>
+          </tbody>
         </table>
-    </form>
-</body>
+      </form>
+    </div>
+  </body>
 </html>

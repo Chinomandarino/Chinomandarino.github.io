@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Examen en línea - The Office</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body class="bg-gray-100">
+    <div class="container mx-auto p-8">
+      <form action="practica4.php" method="POST">
+        <div class="bg-white shadow-lg rounded-lg p-6">
+          <h1 class="text-2xl font-bold mb-6">
+            Examen sobre <em>The Office</em>
+          </h1>
+          <hr class="mb-4" />
+
+          <!-- Pregunta 1 -->
+          <div class="mb-4">
+            <div class="text-lg font-semibold mb-2">
+              1. ¿En qué ciudad está la oficina de Dunder Mifflin?
+            </div>
+            <div>
+              <input
+                class="w-full border rounded p-2"
+                type="text"
+                name="pregunta1"
+                required
+              />
+            </div>
+          </div>
+
+          <!-- Pregunta 2 -->
+          <div class="mb-4">
+            <div class="text-lg font-semibold mb-2">
+              2. ¿Quién es el gerente regional de la sucursal de Scranton?
+            </div>
+            <div>
+              <input
+                class="w-full border rounded p-2"
+                type="text"
+                name="pregunta2"
+                required
+              />
+            </div>
+          </div>
+
+          <!-- Pregunta 3 -->
+          <div class="mb-4">
+            <div class="text-lg font-semibold mb-2">
+              3. ¿Quién es el asistente del gerente regional?
+            </div>
+            <div>
+              <p>
+                <input
+                  type="radio"
+                  name="pregunta3"
+                  value="Jim Halpert"
+                  required
+                />
+                Jim Halpert
+              </p>
+              <p>
+                <input
+                  type="radio"
+                  name="pregunta3"
+                  value="Dwight Schrute"
+                  required
+                />
+                Dwight Schrute
+              </p>
+              <p>
+                <input
+                  type="radio"
+                  name="pregunta3"
+                  value="Ryan Howard"
+                  required
+                />
+                Ryan Howard
+              </p>
+            </div>
+          </div>
+
+          <!-- Pregunta 4 -->
+          <div class="mb-4">
+            <div class="text-lg font-semibold mb-2">
+              4. ¿Cómo se llama la recepcionista de Dunder Mifflin?
+            </div>
+            <div>
+              <input
+                class="w-full border rounded p-2"
+                type="text"
+                name="pregunta4"
+                required
+              />
+            </div>
+          </div>
+
+          <!-- Pregunta 5 -->
+          <div class="mb-4">
+            <div class="text-lg font-semibold mb-2">
+              5. ¿Qué producto vende Dunder Mifflin?
+            </div>
+            <div>
+              <p>
+                <input type="radio" name="pregunta5" value="Papel" required />
+                Papel
+              </p>
+              <p>
+                <input
+                  type="radio"
+                  name="pregunta5"
+                  value="Impresoras"
+                  required
+                />
+                Impresoras
+              </p>
+              <p>
+                <input
+                  type="radio"
+                  name="pregunta5"
+                  value="Software"
+                  required
+                />
+                Software
+              </p>
+            </div>
+          </div>
+
+          <!-- Pregunta 6 -->
+          <div class="mb-4">
+            <div class="text-lg font-semibold mb-2">
+              6. ¿Cómo se llama el jefe de contabilidad?
+            </div>
+            <div>
+              <input
+                class="w-full border rounded p-2"
+                type="text"
+                name="pregunta6"
+                required
+              />
+            </div>
+          </div>
+
+          <!-- Pregunta 7 -->
+          <div class="mb-4">
+            <div class="text-lg font-semibold mb-2">
+              7. ¿Quién creó el programa “Threat Level Midnight”?
+            </div>
+            <div>
+              <p>
+                <input
+                  type="radio"
+                  name="pregunta7"
+                  value="Michael Scott"
+                  required
+                />
+                Michael Scott
+              </p>
+              <p>
+                <input
+                  type="radio"
+                  name="pregunta7"
+                  value="Dwight Schrute"
+                  required
+                />
+                Dwight Schrute
+              </p>
+              <p>
+                <input
+                  type="radio"
+                  name="pregunta7"
+                  value="Andy Bernard"
+                  required
+                />
+                Andy Bernard
+              </p>
+            </div>
+          </div>
+
+          <!-- Pregunta 8 -->
+          <div class="mb-4">
+            <div class="text-lg font-semibold mb-2">
+              8. ¿Quién es el jefe de recursos humanos en la oficina de
+              Scranton?
+            </div>
+            <div>
+              <input
+                class="w-full border rounded p-2"
+                type="text"
+                name="pregunta8"
+                required
+              />
+            </div>
+          </div>
+
+          <!-- Pregunta 9 -->
+          <div class="mb-4">
+            <div class="text-lg font-semibold mb-2">
+              9. ¿Cómo se llama la compañía que intenta comprar a Dunder
+              Mifflin?
+            </div>
+            <div>
+              <input
+                class="w-full border rounded p-2"
+                type="text"
+                name="pregunta9"
+                required
+              />
+            </div>
+          </div>
+
+          <!-- Pregunta 10 -->
+          <div class="mb-4">
+            <div class="text-lg font-semibold mb-2">
+              10. ¿Qué deporte juega Jim en su tiempo libre?
+            </div>
+            <div>
+              <p>
+                <input
+                  type="radio"
+                  name="pregunta10"
+                  value="Baloncesto"
+                  required
+                />
+                Baloncesto
+              </p>
+              <p>
+                <input
+                  type="radio"
+                  name="pregunta10"
+                  value="Beisbol"
+                  required
+                />
+                Beisbol
+              </p>
+              <p>
+                <input type="radio" name="pregunta10" value="Golf" required />
+                Golf
+              </p>
+            </div>
+          </div>
+
+          <!-- Botón de envío -->
+          <div class="mt-6">
+            <input
+              type="submit"
+              class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 cursor-pointer"
+              value="Terminar examen"
+            />
+          </div>
+        </div>
+      </form>
+    </div>
+  </body>
+</html>
