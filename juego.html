@@ -164,7 +164,7 @@
           checkWinner();
           if (currentPlayer === "X") {
             currentPlayer = "O";
-            setTimeout(() => botMove(), 100); // Añadido timeout para visualización del movimiento
+            setTimeout(() => botMove(), 100); 
           } else {
             currentPlayer = "X";
           }
@@ -213,9 +213,9 @@
         } else if (botDifficulty === 2) {
           move = getMediumMove();
         } else if (botDifficulty === 3) {
-          move = getMediumMove(); // Implementar mejor lógica para nivel 3 si se desea
+          move = getMediumMove(); 
         } else if (botDifficulty === 4) {
-          move = getAdvancedMove(); // Implementar mejor lógica para nivel 4 si se desea
+          move = getAdvancedMove(); 
         } else if (botDifficulty === 5) {
           move = getHardMove();
         }
