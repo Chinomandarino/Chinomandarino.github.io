@@ -1,4 +1,4 @@
-# GonzalezRodriguezOmar.github.io
+# Chinomandarino.github.io
 
 González Rodríguez Omar
 
