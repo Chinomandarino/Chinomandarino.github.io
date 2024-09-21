@@ -164,7 +164,7 @@
           checkWinner();
           if (currentPlayer === "X") {
             currentPlayer = "O";
-            setTimeout(() => botMove(), 100); 
+            setTimeout(() => botMove(), 100);
           } else {
             currentPlayer = "X";
           }
@@ -213,9 +213,9 @@
         } else if (botDifficulty === 2) {
           move = getMediumMove();
         } else if (botDifficulty === 3) {
-          move = getMediumMove(); 
+          move = getMediumMove();
         } else if (botDifficulty === 4) {
-          move = getAdvancedMove(); 
+          move = getAdvancedMove();
         } else if (botDifficulty === 5) {
           move = getHardMove();
         }
