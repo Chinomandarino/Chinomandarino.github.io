@@ -1,121 +1,160 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link
-      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
-      rel="stylesheet"
-    />
-    <title>Mis prácticas del primer parcial</title>
-  </head>
-  <body class="bg-gray-100 p-8">
-    <div class="max-w-4xl mx-auto">
-      <h1 class="text-2xl font-bold text-center mb-6">
-        Mis prácticas del primer parcial
-      </h1>
-      <ul class="space-y-6">
-        <!-- Práctica #1 -->
-        <li class="bg-white p-4 rounded shadow">
-          <h2 class="text-xl font-semibold">Práctica #1</h2>
-          <p class="text-gray-600">PHP 1</p>
-          <div class="mt-2 space-x-4">
-            <a
-              href="../Practica1/Practica1.html"
-              class="text-blue-600 hover:underline"
-              >HTML</a
-            >
-            <a
-              href="../Practica1/practica1.php"
-              class="text-blue-600 hover:underline"
-              >PHP</a
-            >
-            <a
-              href="../Practica1/resultado.png"
-              class="text-blue-600 hover:underline"
-              >FOTO</a
-            >
-          </div>
-        </li>
+<html lang="es">
 
-        <!-- Práctica #2 -->
-        <li class="bg-white p-4 rounded shadow">
-          <h2 class="text-xl font-semibold">Práctica #2</h2>
-          <p class="text-gray-600">PHP 2</p>
-          <div class="mt-2 space-x-4">
-            <a
-              href="../Practica2/practica2.html"
-              class="text-blue-600 hover:underline"
-              >HTML</a
-            >
-            <a
-              href="../Practica2/practica2.php"
-              class="text-blue-600 hover:underline"
-              >PHP</a
-            >
-            <a
-              href="../Practica2/image.png"
-              class="text-blue-600 hover:underline"
-              >FOTO</a
-            >
-          </div>
-        </li>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+  <title>Mis prácticas del primer parcial</title>
+  <style>
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 50;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0, 0, 0, 0.4);
+    }
 
-        <!-- Práctica #3 -->
-        <li class="bg-white p-4 rounded shadow">
-          <h2 class="text-xl font-semibold">Práctica #3</h2>
-          <p class="text-gray-600">GATO</p>
-          <div class="mt-2 space-x-4">
-            <a
-              href="../Practica3/Practica3.html"
-              class="text-blue-600 hover:underline"
-              >HTML</a
-            >
-            <a
-              href="../Practica3/Practica3.php"
-              class="text-blue-600 hover:underline"
-              >PHP</a
-            >
-            <a
-              href="../Practica3/EMPATE.png"
-              class="text-blue-600 hover:underline"
-              >FOTO NO GANADOR</a
-            >
-            <a
-              href="../Practica3/GANADORX.png"
-              class="text-blue-600 hover:underline"
-              >FOTO GANADOR X</a
-            >
-            <a
-              href="../Practica3/GANADORO.png"
-              class="text-blue-600 hover:underline"
-              >FOTO GANADOR O</a
-            >
-          </div>
-        </li>
-        	
-        <li class="bg-white p-4 rounded shadow">
-          <h2 class="text-xl font-semibold">Práctica #4</h2>
-          <p class="text-gray-600">Examen</p>
-          <div class="mt-2 space-x-4">
-            <a
-              href="../practica4/practica4.html"
-              class="text-blue-600 hover:underline"
-              >HTML</a
-            >
-            <a
-              href="../practica4/practica4.php"
-              class="text-blue-600 hover:underline"
-              >PHP</a
-            >
-            <a
-              href="../practica4/resultado.png"
-              class="text-blue-600 hover:underline"
-              >resultado</a
-            >
-          </div>
-        </li>
-      </ul>
+    .modal-content {
+      background-color: #fefefe;
+      margin: 15% auto;
+      padding: 20px;
+      border: 1px solid #888;
+      width: 80%;
+    }
+
+    .close {
+      color: #aaa;
+      float: right;
+      font-size: 28px;
+      font-weight: bold;
+    }
+
+    .close:hover,
+    .close:focus {
+      color: black;
+      text-decoration: none;
+      cursor: pointer;
+    }
+  </style>
+</head>
+
+<body class="bg-gray-100 p-8">
+  <div class="max-w-4xl mx-auto">
+    <h1 class="text-2xl font-bold text-center mb-6">
+      Mis prácticas del primer parcial
+    </h1>
+    <ul class="space-y-6">
+      <!-- Práctica #1 -->
+      <li class="bg-white p-4 rounded shadow">
+        <h2 class="text-xl font-semibold">Práctica #1</h2>
+        <p class="text-gray-600">PHP 1</p>
+        <div class="mt-2 space-x-4">
+          <a href="../Parcial1/practica1/Practica1.html" class="text-blue-600 hover:underline">HTML</a>
+          <a href="../Parcial1/practica1/practica1.php" class="text-blue-600 hover:underline">PHP</a>
+          <a href="#" onclick="openModal('modal1')" class="text-blue-600 hover:underline">FOTO</a>
+        </div>
+      </li>
+
+      <!-- Práctica #2 -->
+      <li class="bg-white p-4 rounded shadow">
+        <h2 class="text-xl font-semibold">Práctica #2</h2>
+        <p class="text-gray-600">PHP 2</p>
+        <div class="mt-2 space-x-4">
+          <a href="../Parcial1/practica2/practica2.html" class="text-blue-600 hover:underline">HTML</a>
+          <a href="../Parcial1/practica2/practica2.php" class="text-blue-600 hover:underline">PHP</a>
+          <a href="#" onclick="openModal('modal2')" class="text-blue-600 hover:underline">FOTO</a>
+        </div>
+      </li>
+
+      <!-- Práctica #3 -->
+      <li class="bg-white p-4 rounded shadow">
+        <h2 class="text-xl font-semibold">Práctica #3</h2>
+        <p class="text-gray-600">GATO</p>
+        <div class="mt-2 space-x-4">
+          <a href="../Parcial1/practica3/Practica3.html" class="text-blue-600 hover:underline">HTML</a>
+          <a href="../Parcial1/practica3/Practica3.php" class="text-blue-600 hover:underline">PHP</a>
+          <a href="#" onclick="openModal('modal3_1')" class="text-blue-600 hover:underline">FOTO NO GANADOR</a>
+          <a href="#" onclick="openModal('modal3_2')" class="text-blue-600 hover:underline">FOTO GANADOR X</a>
+          <a href="#" onclick="openModal('modal3_3')" class="text-blue-600 hover:underline">FOTO GANADOR O</a>
+        </div>
+      </li>
+
+      <!-- Práctica #4 -->
+      <li class="bg-white p-4 rounded shadow">
+        <h2 class="text-xl font-semibold">Práctica #4</h2>
+        <p class="text-gray-600">Examen</p>
+        <div class="mt-2 space-x-4">
+          <a href="../Parcial1/practica4/practica4.html" class="text-blue-600 hover:underline">HTML</a>
+          <a href="../Parcial1/practica4/practica4.php" class="text-blue-600 hover:underline">PHP</a>
+          <a href="#" onclick="openModal('modal4')" class="text-blue-600 hover:underline">FOTO RESULTADO</a>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+  <!-- Modales -->
+  <div id="modal1" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal('modal1')">&times;</span>
+      <img src="../Parcial1/practica1/resultado.png" alt="FOTO" class="w-full">
     </div>
-  </body>
+  </div>
+
+  <div id="modal2" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal('modal2')">&times;</span>
+      <img src="../Parcial1/practica2/image.png" alt="FOTO" class="w-full">
+    </div>
+  </div>
+
+  <div id="modal3_1" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal('modal3_1')">&times;</span>
+      <img src="../Parcial1/practica3/EMPATE.png" alt="FOTO NO GANADOR" class="w-full">
+    </div>
+  </div>
+
+  <div id="modal3_2" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal('modal3_2')">&times;</span>
+      <img src="../Parcial1/practica3/GANADORX.png" alt="FOTO GANADOR X" class="w-full">
+    </div>
+  </div>
+
+  <div id="modal3_3" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal('modal3_3')">&times;</span>
+      <img src="../Parcial1/practica3/GANADORO.png" alt="FOTO GANADOR O" class="w-full">
+    </div>
+  </div>
+
+  <div id="modal4" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal('modal4')">&times;</span>
+      <img src="../Parcial1/practica4/resultado.png" alt="FOTO RESULTADO" class="w-full">
+    </div>
+  </div>
+
+  <script>
+    function openModal(modalId) {
+      document.getElementById(modalId).style.display = 'block';
+    }
+
+    function closeModal(modalId) {
+      document.getElementById(modalId).style.display = 'none';
+    }
+
+    window.onclick = function (event) {
+      if (event.target.classList.contains('modal')) {
+        event.target.style.display = 'none';
+      }
+    }
+  </script>
+</body>
+
 </html>
