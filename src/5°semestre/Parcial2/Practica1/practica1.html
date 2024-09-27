@@ -1,11 +1,15 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Aplicación de Personalización de Elementos</title>
-    <script src="https://cdn.tailwindcss.com"></script> <!-- Cargamos Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+
 </head>
+
 <body class="bg-gray-100 text-gray-800">
 
     <div class="container mx-auto p-8">
@@ -24,12 +28,14 @@
         </div>
 
         <!-- Cambiar color de fondo del bloque -->
-        <button class="bg-green-500 text-white px-4 py-2 mt-4 rounded-md hover:bg-green-700" onclick="changeBlockColor()">
+        <button class="bg-green-500 text-white px-4 py-2 mt-4 rounded-md hover:bg-green-700"
+            onclick="changeBlockColor()">
             Cambiar Color de Fondo
         </button>
 
         <!-- Cambiar color del texto -->
-        <button class="bg-yellow-500 text-white px-4 py-2 mt-4 rounded-md hover:bg-yellow-700" onclick="changeTextColor()">
+        <button class="bg-yellow-500 text-white px-4 py-2 mt-4 rounded-md hover:bg-yellow-700"
+            onclick="changeTextColor()">
             Cambiar Color del Texto
         </button>
 
@@ -40,7 +46,8 @@
 
         <!-- Input para cambiar el texto del bloque -->
         <div class="mt-4">
-            <input type="text" id="customTextInput" class="border border-gray-300 p-2 rounded-md" placeholder="Escribe un nuevo texto">
+            <input type="text" id="customTextInput" class="border border-gray-300 p-2 rounded-md"
+                placeholder="Escribe un nuevo texto">
             <button class="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-700" onclick="updateBlockText()">
                 Cambiar Texto del Bloque
             </button>
@@ -53,6 +60,7 @@
 
     </div>
 
-    <script src="practica5.js"></script> <!-- Cargamos el archivo JavaScript -->
+    <script src="practica1.js"></script> <!-- Cargamos el archivo JavaScript -->
 </body>
+
 </html>
