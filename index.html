@@ -1,86 +1,73 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" href="/path/to/new-logo.png" type="image/png" />
-    <link
-      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
-      rel="stylesheet"
-    />
-    <title>Portafolio Personal</title>
-    <style>
-      @keyframes caerMedio {
-        from {
-          transform: translateY(-100%);
-          opacity: 0;
-        }
-        to {
-          transform: translateY(0);
-          opacity: 1;
-        }
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" href="/path/to/new-logo.png" type="image/png" />
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+  <title>Portafolio Personal</title>
+  <style>
+    @keyframes caerMedio {
+      from {
+        transform: translateY(-100%);
+        opacity: 0;
       }
 
-      .caerMedio {
-        animation: caerMedio 2s ease-out;
+      to {
+        transform: translateY(0);
+        opacity: 1;
       }
-    </style>
-  </head>
-  <body class="bg-[#ba4778] h-screen flex items-center justify-center">
-    <div class="w-full flex flex-col items-center">
-      <!-- Foto de perfil -->
-      <img
-        id="Foto"
-        src="https://avatars.githubusercontent.com/u/109099967?v=4"
-        alt="Foto de perfil"
-        class="w-[40px] h-[40px] rounded-[5%] transition-all hover:rounded-full shadow-md mb-3"
-      />
+    }
 
-      <!-- Navegación -->
-      <nav class="bg-white rounded-full py-4 px-6 shadow-xl">
-        <ul class="flex space-x-6">
-          <li class="caerMedio">
-            <a
-              href="/src/5°semestre/Practicas/Practicas1.html"
-              class="text-[#03093b] text-lg font-medium hover:text-[#00bc51] transition-colors duration-200"
-            >
-              Parcial 1
-            </a>
-          </li>
-          <li class="caerMedio">
-            <a
-              href="/src/5°semestre/Practicas/Practicas2.html"
-              class="text-[#03093b] text-lg font-medium hover:text-[#00bc51] transition-colors duration-200"
-            >
-              Parcial 2
-            </a>
-          </li>
-          <li class="caerMedio">
-            <a
-              href="/src/5°semestre/Practicas/Practicas3.html"
-              class="text-[#03093b] text-lg font-medium hover:text-[#00bc51] transition-colors duration-200"
-            >
-              Parcial 3
-            </a>
-          </li>
-          <li class="caerMedio">
-            <a
-              href="/Bootstrap/index.html"
-              class="text-[#03093b] text-lg font-medium hover:text-[#00bc51] transition-colors duration-200"
-            >
-              Página Copia
-            </a>
-          </li>
-          <li class="caerMedio">
-            <a
-              href="/juego.html"
-              class="text-[#03093b] text-lg font-medium hover:text-[#00bc51] transition-colors duration-200"
-            >
-              Tic-tac-toe
-            </a>
-          </li>
-        </ul>
-      </nav>
-    </div>
-  </body>
+    .caerMedio {
+      animation: caerMedio 2s ease-out;
+    }
+  </style>
+</head>
+
+<body class="h-screen flex items-center justify-center">
+  <div class="relative w-full flex flex-col items-center">
+    <!-- Foto de perfil -->
+    <img id="Foto" src="Media/descarga.jpeg" alt="Foto de perfil"
+      class=" w-40 h-30 rounded-3xl border-dashed ring-4 ring-indigo-900 -translate-y-16" />
+
+    <!-- Navegación -->
+    <nav class="bg-white rounded-full py-4 px-6 shadow-xl mt-20">
+      <ul class="flex space-x-6">
+        <li class="caerMedio">
+          <a href="/src/5°semestre/Practicas/Practicas1.html"
+            class="text-[#03093b] text-lg font-medium hover:text-[#00bc51] transition-colors duration-200">
+            Parcial 1
+          </a>
+        </li>
+        <li class="caerMedio">
+          <a href="/src/5°semestre/Practicas/Practicas2.html"
+            class="text-[#03093b] text-lg font-medium hover:text-[#00bc51] transition-colors duration-200">
+            Parcial 2
+          </a>
+        </li>
+        <li class="caerMedio">
+          <a href="/src/5°semestre/Practicas/Practicas3.html"
+            class="text-[#03093b] text-lg font-medium hover:text-[#00bc51] transition-colors duration-200">
+            Parcial 3
+          </a>
+        </li>
+        <li class="caerMedio">
+          <a href="/Bootstrap/index.html"
+            class="text-[#03093b] text-lg font-medium hover:text-[#00bc51] transition-colors duration-200">
+            Página Copia
+          </a>
+        </li>
+        <li class="caerMedio">
+          <a href="/juego.html"
+            class="text-[#03093b] text-lg font-medium hover:text-[#00bc51] transition-colors duration-200">
+            Tic-tac-toe
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</body>
+
 </html>
