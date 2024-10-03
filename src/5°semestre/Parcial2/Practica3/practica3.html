@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Juego del Gato</title>
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
   <style>
     .cell {
       cursor: pointer;
@@ -24,10 +25,12 @@
 
     .cell.X {
       color: #f56565;
+      /* Color para el jugador X */
     }
 
     .cell.O {
       color: #68d391;
+      /* Color para el jugador O */
     }
 
     .board {
@@ -69,18 +72,94 @@
 
     .difficulty-button.selected {
       background-color: #68d391;
+      /* Color para el botón seleccionado */
       color: white;
       border-color: #68d391;
     }
 
     .star {
       font-size: 1.5rem;
+      /* Tamaño de las estrellas */
+    }
+
+    .switch-container {
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+    }
+
+    .switch {
+      display: flex;
+      align-items: center;
+      margin-right: 1rem;
+    }
+
+    .switch input {
+      display: none;
+      /* Ocultar el checkbox */
+    }
+
+    .switch-label {
+      cursor: pointer;
+      width: 50px;
+      height: 24px;
+      background: #ccc;
+      border-radius: 50px;
+      position: relative;
+      transition: background 0.3s;
+    }
+
+    .switch-label::after {
+      content: '';
+      width: 20px;
+      height: 20px;
+      background: white;
+      border-radius: 50%;
+      position: absolute;
+      top: 2px;
+      left: 2px;
+      transition: transform 0.3s;
+    }
+
+    .switch input:checked+.switch-label {
+      background: #68d391;
+      /* Color para el switch activado */
+    }
+
+    .switch input:checked+.switch-label::after {
+      transform: translateX(26px);
+      /* Mover el botón del switch */
+    }
+
+    .switch-icons {
+      display: flex;
+      align-items: center;
+      margin: 0 10px;
+    }
+
+    .switch-icons i {
+      font-size: 1.5rem;
+      /* Tamaño de los iconos */
     }
   </style>
 </head>
 
 <body class="flex flex-col items-center justify-center min-h-screen bg-gray-100 font-sans">
   <h1 class="text-3xl font-bold mb-6">Juego del Gato</h1>
+
+  <div class="switch-container">
+    <div class="switch-icons">
+      <i class="fas fa-user"></i> <!-- Icono para el jugador -->
+    </div>
+    <div class="switch">
+      <input type="checkbox" id="modeSwitch" />
+      <label class="switch-label" for="modeSwitch"></label>
+    </div>
+    <div class="switch-icons">
+      <i class="fas fa-robot"></i> <!-- Icono para el bot -->
+    </div>
+  </div>
+
   <div class="flex">
     <div class="bg-white p-6 rounded-lg shadow-md">
       <div id="message" class="text-xl font-bold mb-4"></div>
@@ -109,29 +188,22 @@
         <button data-difficulty="1" class="difficulty-button star">⭐</button>
       </li>
       <li class="difficulty-item">
-        <button data-difficulty="2" class="difficulty-button star">
-          ⭐⭐
-        </button>
+        <button data-difficulty="2" class="difficulty-button star">⭐⭐</button>
       </li>
       <li class="difficulty-item">
-        <button data-difficulty="3" class="difficulty-button star">
-          ⭐⭐⭐
-        </button>
+        <button data-difficulty="3" class="difficulty-button star">⭐⭐⭐</button>
       </li>
       <li class="difficulty-item">
-        <button data-difficulty="4" class="difficulty-button star">
-          ⭐⭐⭐⭐
-        </button>
+        <button data-difficulty="4" class="difficulty-button star">⭐⭐⭐⭐</button>
       </li>
       <li class="difficulty-item">
-        <button data-difficulty="5" class="difficulty-button star">
-          ⭐⭐⭐⭐⭐
-        </button>
+        <button data-difficulty="5" class="difficulty-button star">⭐⭐⭐⭐⭐</button>
       </li>
     </ul>
   </div>
 
-  <script src="practica3.js"></script>
+  <script src="/Juego.js"></script>
+
 
 </body>
 
