@@ -4,14 +4,51 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>proyecto de estadística</title>
+    <title> Tiempos de Desplazamiento</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/11.5.0/math.min.js"></script>
-
 </head>
 
 <body class="bg-gray-100 min-h-screen">
+    <!-- Modal de Bienvenida -->
+    <div id="welcomeModal" class="fixed inset-0 bg-black bg-opacity-75 z-50 flex items-center justify-center">
+        <div class="bg-white rounded-xl shadow-2xl p-8 relative w-3/4 max-w-lg">
+            <!-- Slide 1 -->
+            <div id="slide1">
+                <h2 class="text-xl font-bold">Datos de Identificación</h2>
+                <p>Materia: Probabilidad y Estadística</p>
+                <p>Integrantes: Omar González Rodríguez</p>
+                <p>Maestro: Ricardo Osuna Monarrez</p>
+                <p>Tema: Duración del trayecto casa-trabajo/escuela</p>
+                <button onclick="nextSlide()" class="mt-4 bg-blue-600 text-white px-4 py-2 rounded">Siguiente</button>
+            </div>
+
+            <!-- Slide 2 -->
+            <div id="slide2" class="hidden">
+                <h2 class="text-xl font-bold">Descripción del Tema</h2>
+                <p>Una tabla de frecuencias es una herramienta estadística que permite organizar y resumir un conjunto
+                    de
+                    datos. Se usa para analizar distribuciones de datos y facilitar la interpretación de tendencias.</p>
+                <h3 class="text-lg font-semibold mt-2">¿Para qué sirve?</h3>
+                <p>Ayuda a identificar patrones en grandes volúmenes de datos, facilitando su análisis y comparación.
+                </p>
+                <h3 class="text-lg font-semibold mt-2">Ventajas</h3>
+                <ul class="list-disc pl-6">
+                    <li>Permite organizar datos de manera clara.</li>
+                    <li>Facilita el análisis de tendencias y patrones.</li>
+                    <li>Es una base fundamental para cálculos estadísticos.</li>
+                </ul>
+                <h3 class="text-lg font-semibold mt-2">Razón del Tema</h3>
+                <p>El análisis del trayecto casa-trabajo/escuela es útil para comprender tiempos de desplazamiento y
+                    posibles mejoras en movilidad urbana.</p>
+                <button onclick="closeWelcomeModal()"
+                    class="mt-4 bg-green-600 text-white px-4 py-2 rounded">Continuar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Contenido Principal -->
     <div class="container mx-auto px-4 py-6">
         <!-- Header -->
         <div class="bg-gradient-to-r from-blue-700 to-indigo-800 rounded-xl shadow-xl p-6 mb-6 text-white">
@@ -29,7 +66,7 @@
 
         <!-- KPI Cards -->
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
-            <!-- KPI Card: Media -->
+            <!-- Media -->
             <div class="bg-white rounded-xl shadow-md p-6 hover:shadow-lg transition-shadow duration-300">
                 <div class="flex items-center">
                     <div class="rounded-full bg-blue-100 p-3">
@@ -46,7 +83,7 @@
                 </div>
             </div>
 
-            <!-- KPI Card: Mediana -->
+            <!-- Mediana -->
             <div class="bg-white rounded-xl shadow-md p-6 hover:shadow-lg transition-shadow duration-300">
                 <div class="flex items-center">
                     <div class="rounded-full bg-green-100 p-3">
@@ -63,7 +100,7 @@
                 </div>
             </div>
 
-            <!-- KPI Card: Moda -->
+            <!-- Moda -->
             <div class="bg-white rounded-xl shadow-md p-6 hover:shadow-lg transition-shadow duration-300">
                 <div class="flex items-center">
                     <div class="rounded-full bg-purple-100 p-3">
@@ -80,7 +117,7 @@
                 </div>
             </div>
 
-            <!-- KPI Card: Desviación Estándar -->
+            <!-- Desviación Estándar -->
             <div class="bg-white rounded-xl shadow-md p-6 hover:shadow-lg transition-shadow duration-300">
                 <div class="flex items-center">
                     <div class="rounded-full bg-red-100 p-3">
@@ -120,6 +157,7 @@
                 </div>
             </div>
 
+            <!-- Tabla de Distribución -->
             <!-- Tabla de Distribución -->
             <div class="lg:w-1/3">
                 <div class="bg-white rounded-xl shadow-md p-6 h-full">
@@ -366,7 +404,6 @@
             </div>
         </div>
 
-        <!-- Tabla de Frecuencias Completa y Conclusión -->
         <div class="grid grid-cols-1 gap-6 mb-6">
             <div class="bg-white rounded-xl shadow-md p-6">
                 <h2 class="text-xl font-bold mb-4 text-gray-800">Tabla de Frecuencias Completa</h2>
@@ -502,7 +539,7 @@
                     <div class="bg-gray-50 p-4 rounded-lg flex flex-col items-center">
                         <div class="mb-3 text-sm text-gray-500 font-medium">Fuente: Encuesta en Instagram</div>
                         <img src="image.png" alt="Captura de pantalla de la encuesta" class="w-15 h-auto rounded-lg shadow-sm border-2 border-gray-200
-                                        hover:shadow-md transition-shadow duration-300 cursor-zoom-in">
+                                                hover:shadow-md transition-shadow duration-300 cursor-zoom-in">
                         <p class="mt-3 text-sm text-gray-500 italic">
                             Metodología: Encuesta en stories de pregunta abierta<br>
                             Muestra: 50 participantes - Fecha: 15/05/2024
@@ -514,34 +551,59 @@
     </div>
 
     <script>
-        // Datos para las gráficas
         const chartData = {
             classLimits: ['6-13', '14-21', '22-29', '30-37', '38-45', '46-53', '54-61'],
             frequencies: [5, 12, 7, 9, 8, 5, 4],
             acumFrequencies: [5, 17, 24, 33, 41, 46, 50],
-            upperLimits: [13, 21, 29, 37, 45, 53, 61] // Límites superiores reales
+            upperLimits: [13, 21, 29, 37, 45, 53, 61]
         };
 
-        let chart = inicializarChart();
+        let chart;
 
-        // Event Listeners
-        document.getElementById('btnBarChart').addEventListener('click', () => {
-            updateChart('bar', chartData.classLimits, 'Frecuencia Absoluta', chartData.frequencies);
-            toggleActiveButton('btnBarChart');
+        document.addEventListener('DOMContentLoaded', () => {
+            document.getElementById('welcomeModal').style.display = 'flex';
         });
 
-        document.getElementById('btnPolyChart').addEventListener('click', () => {
-            updateChart('line', chartData.classLimits, 'Polígono de Frecuencias', chartData.frequencies, true);
-            toggleActiveButton('btnPolyChart');
+        function nextSlide() {
+            document.getElementById('slide1').classList.add('hidden');
+            document.getElementById('slide2').classList.remove('hidden');
+        }
+
+        function closeWelcomeModal() {
+            document.getElementById('welcomeModal').style.display = 'none';
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const modal = document.getElementById('welcomeModal');
+            const content = modal.querySelector('.bg-white');
+
+            setTimeout(() => {
+                content.classList.remove('scale-95', 'opacity-0');
+                content.classList.add('scale-100', 'opacity-100');
+            }, 50);
+
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) closeWelcomeModal();
+            });
+
+            chart = inicializarChart();
         });
 
-        document.getElementById('btnOgiveChart').addEventListener('click', () => {
-            crearOjivaSuave();
-            toggleActiveButton('btnOgiveChart');
-        });
+        function closeWelcomeModal() {
+            const modal = document.getElementById('welcomeModal');
+            const content = modal.querySelector('.bg-white');
+
+            content.classList.remove('scale-100', 'opacity-100');
+            content.classList.add('scale-95', 'opacity-0');
+
+            setTimeout(() => {
+                modal.classList.add('opacity-0');
+                setTimeout(() => modal.style.display = 'none', 300);
+            }, 200);
+        }
 
         function inicializarChart() {
-            return new Chart(document.getElementById('mainChart'), {
+            return new Chart(document.getElementById('mainChart').getContext('2d'), {
                 type: 'bar',
                 data: {
                     labels: chartData.classLimits,
@@ -551,6 +613,26 @@
                         backgroundColor: 'rgba(59, 130, 246, 0.8)',
                         borderColor: 'rgba(59, 130, 246, 1)',
                         borderWidth: 1
+                    }]
+                },
+                options: getCommonOptions('Rango de Tiempo (minutos)', 'Frecuencia')
+            });
+        }
+
+        function updateChart(type, label, data, fill = false) {
+            chart.destroy();
+            chart = new Chart(document.getElementById('mainChart'), {
+                type: type,
+                data: {
+                    labels: chartData.classLimits,
+                    datasets: [{
+                        label: label,
+                        data: data,
+                        backgroundColor: 'rgba(59, 130, 246, 0.8)',
+                        borderColor: 'rgba(59, 130, 246, 1)',
+                        borderWidth: 1,
+                        fill: fill,
+                        tension: fill ? 0.4 : 0
                     }]
                 },
                 options: getCommonOptions('Rango de Tiempo (minutos)', 'Frecuencia')
@@ -571,10 +653,8 @@
                         backgroundColor: 'rgba(34, 197, 94, 0.2)',
                         borderColor: 'rgba(34, 197, 94, 1)',
                         borderWidth: 2,
-                        fill: false,
-                        tension: 0.4, // Curva suave
-                        pointRadius: 5,
-                        pointBackgroundColor: 'rgba(34, 197, 94, 1)'
+                        tension: 0.4,
+                        pointRadius: 5
                     }]
                 },
                 options: {
@@ -583,9 +663,7 @@
                         x: {
                             type: 'linear',
                             ticks: {
-                                callback: function (value) {
-                                    return value + ' min';
-                                },
+                                callback: value => value + ' min',
                                 stepSize: 8
                             }
                         }
@@ -594,38 +672,13 @@
             });
         }
 
-        function updateChart(type, labels, label, data, fill = false) {
-            chart.destroy();
-            chart = new Chart(document.getElementById('mainChart'), {
-                type: type,
-                data: {
-                    labels: labels,
-                    datasets: [{
-                        label: label,
-                        data: data,
-                        backgroundColor: 'rgba(59, 130, 246, 0.8)',
-                        borderColor: 'rgba(59, 130, 246, 1)',
-                        borderWidth: 1,
-                        fill: fill,
-                        tension: fill ? 0.4 : 0
-                    }]
-                },
-                options: getCommonOptions('Rango de Tiempo (minutos)', 'Frecuencia')
-            });
-        }
-
         function getCommonOptions(xTitle, yTitle) {
             return {
                 responsive: true,
                 maintainAspectRatio: false,
                 scales: {
-                    y: {
-                        beginAtZero: true,
-                        title: { display: true, text: yTitle }
-                    },
-                    x: {
-                        title: { display: true, text: xTitle }
-                    }
+                    y: { beginAtZero: true, title: { display: true, text: yTitle } },
+                    x: { title: { display: true, text: xTitle } }
                 }
             };
         }
@@ -637,8 +690,23 @@
             });
             document.getElementById(activeId).classList.add('bg-blue-600', 'text-white');
         }
-    </script>
 
+        // Event Listeners
+        document.getElementById('btnBarChart').addEventListener('click', () => {
+            updateChart('bar', 'Frecuencia Absoluta', chartData.frequencies);
+            toggleActiveButton('btnBarChart');
+        });
+
+        document.getElementById('btnPolyChart').addEventListener('click', () => {
+            updateChart('line', 'Polígono de Frecuencias', chartData.frequencies, true);
+            toggleActiveButton('btnPolyChart');
+        });
+
+        document.getElementById('btnOgiveChart').addEventListener('click', () => {
+            crearOjivaSuave();
+            toggleActiveButton('btnOgiveChart');
+        });
+    </script>
 </body>
 
 </html>
