@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Estadístico</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/11.5.0/math.min.js"></script>
+
+</head>
+
+<body class="bg-gray-100 min-h-screen">
+    <div class="container mx-auto px-4 py-6">
+        <!-- Header -->
+        <div class="bg-gradient-to-r from-blue-700 to-indigo-800 rounded-xl shadow-xl p-6 mb-6 text-white">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div>
+                    <h1 class="text-3xl font-bold">Análisis de Tiempos de Desplazamiento</h1>
+                    <p class="text-blue-100 mt-1">Duración del trayecto casa-trabajo/escuela</p>
+                </div>
+                <div class="mt-4 md:mt-0 flex space-x-2">
+                    <span class="bg-green-500 rounded-full px-3 py-1 text-sm font-semibold">Encuesta Instagram</span>
+                    <span class="bg-blue-500 rounded-full px-3 py-1 text-sm font-semibold">50 muestras</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- KPI Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
+            <!-- KPI Card: Media -->
+            <div class="bg-white rounded-xl shadow-md p-6 hover:shadow-lg transition-shadow duration-300">
+                <div class="flex items-center">
+                    <div class="rounded-full bg-blue-100 p-3">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-600" fill="none"
+                            viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
+                        </svg>
+                    </div>
+                    <div class="ml-4">
+                        <h2 class="text-sm font-medium text-gray-500">Media</h2>
+                        <p class="text-2xl font-bold text-gray-800">30.94</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- KPI Card: Mediana -->
+            <div class="bg-white rounded-xl shadow-md p-6 hover:shadow-lg transition-shadow duration-300">
+                <div class="flex items-center">
+                    <div class="rounded-full bg-green-100 p-3">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-green-600" fill="none"
+                            viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z" />
+                        </svg>
+                    </div>
+                    <div class="ml-4">
+                        <h2 class="text-sm font-medium text-gray-500">Mediana</h2>
+                        <p class="text-2xl font-bold text-gray-800">27.5</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- KPI Card: Moda -->
+            <div class="bg-white rounded-xl shadow-md p-6 hover:shadow-lg transition-shadow duration-300">
+                <div class="flex items-center">
+                    <div class="rounded-full bg-purple-100 p-3">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-purple-600" fill="none"
+                            viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                        </svg>
+                    </div>
+                    <div class="ml-4">
+                        <h2 class="text-sm font-medium text-gray-500">Moda</h2>
+                        <p class="text-2xl font-bold text-gray-800">15, 20</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- KPI Card: Desviación Estándar -->
+            <div class="bg-white rounded-xl shadow-md p-6 hover:shadow-lg transition-shadow duration-300">
+                <div class="flex items-center">
+                    <div class="rounded-full bg-red-100 p-3">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-red-600" fill="none"
+                            viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                        </svg>
+                    </div>
+                    <div class="ml-4">
+                        <h2 class="text-sm font-medium text-gray-500">Desviación Estándar</h2>
+                        <p class="text-2xl font-bold text-gray-800">13.63</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Gráficas y Tabla -->
+        <div class="flex flex-col lg:flex-row gap-6 mb-6">
+            <!-- Gráficas -->
+            <div class="lg:w-2/3">
+                <div class="bg-white rounded-xl shadow-md p-6 h-full">
+                    <h2 class="text-xl font-bold mb-4 text-gray-800">Distribución de Tiempos</h2>
+                    <div class="mb-4">
+                        <div class="flex space-x-2 mb-4">
+                            <button id="btnBarChart"
+                                class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors duration-200">Histograma</button>
+                            <button id="btnPolyChart"
+                                class="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition-colors duration-200">Polígono</button>
+                            <button id="btnOgiveChart"
+                                class="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition-colors duration-200">Ojiva</button>
+                        </div>
+                        <div class="relative h-64 md:h-80">
+                            <canvas id="mainChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tabla de Distribución -->
+            <div class="lg:w-1/3">
+                <div class="bg-white rounded-xl shadow-md p-6 h-full">
+                    <h2 class="text-xl font-bold mb-4 text-gray-800">Distribución de Frecuencias</h2>
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full divide-y divide-gray-200">
+                            <thead class="bg-gray-50">
+                                <tr>
+                                    <th
+                                        class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                        Clase</th>
+                                    <th
+                                        class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                        Límites</th>
+                                    <th
+                                        class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                        Fi</th>
+                                    <th
+                                        class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                        Hi</th>
+                                </tr>
+                            </thead>
+                            <tbody class="bg-white divide-y divide-gray-200">
+                                <tr>
+                                    <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-700">1</td>
+                                    <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-700">6-13</td>
+                                    <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-700">5</td>
+                                    <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-700">0.10</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-700">2</td>
+                                    <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-700">14-21</td>
+                                    <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-700">12</td>
+                                    <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-700">0.24</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-700">3</td>
+                                    <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-700">22-29</td>
+                                    <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-700">7</td>
+                                    <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-700">0.14</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-700">4</td>
+                                    <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-700">30-37</td>
+                                    <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-700">9</td>
+                                    <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-700">0.18</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-700">5</td>
+                                    <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-700">38-45</td>
+                                    <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-700">8</td>
+                                    <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-700">0.16</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-700">6</td>
+                                    <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-700">46-53</td>
+                                    <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-700">5</td>
+                                    <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-700">0.10</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-700">7</td>
+                                    <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-700">54-61</td>
+                                    <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-700">4</td>
+                                    <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-700">0.08</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Medidas Estadísticas -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+            <!-- Medidas de Tendencia Central -->
+            <div class="bg-white rounded-xl shadow-md p-6">
+                <h2 class="text-xl font-bold mb-4 text-gray-800">Medidas de Tendencia Central</h2>
+                <div class="grid grid-cols-1 gap-6">
+                    <!-- Media -->
+                    <div>
+                        <h3 class="text-lg font-semibold mb-2 text-blue-700">Media</h3>
+                        <div class="bg-gray-50 p-4 rounded-lg">
+                            <p class="text-gray-700 mb-2">La media aritmética se calcula sumando todos los valores y
+                                dividiendo
+                                entre el número total de observaciones.</p>
+                            <div class="bg-blue-50 p-4 rounded-lg border-2 border-blue-200">
+                                <div class="flex items-center space-x-2 text-gray-700">
+                                    <span class="italic">μ</span>
+                                    <span class="text-2xl">=</span>
+                                    <div class="flex flex-col items-center">
+                                        <span class="border-b border-gray-400 px-1">Σ(f<sub>i</sub> ·
+                                            x<sub>i</sub>)</span>
+                                        <span class="px-1">N</span>
+                                    </div>
+                                    <span class="text-2xl">=</span>
+                                    <div class="flex flex-col items-center">
+                                        <span class="border-b border-gray-400 px-1">1547</span>
+                                        <span class="px-1">50</span>
+                                    </div>
+                                    <span class="text-2xl">=</span>
+                                    <span class="font-bold text-green-700">30.94</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Mediana -->
+                    <div>
+                        <h3 class="text-lg font-semibold mb-2 text-blue-700">Mediana</h3>
+                        <div class="bg-gray-50 p-4 rounded-lg">
+                            <p class="text-gray-700 mb-2">La mediana es el valor que divide al conjunto de datos en dos
+                                partes
+                                iguales.</p>
+                            <div class="bg-blue-50 p-4 rounded-lg border-2 border-blue-200 space-y-3">
+                                <div class="flex items-baseline space-x-1">
+                                    <span>Posición =</span>
+                                    <div class="flex flex-col items-center">
+                                        <span class="border-b border-gray-400 px-1">N</span>
+                                        <span>2</span>
+                                    </div>
+                                    <span>=</span>
+                                    <div class="flex flex-col items-center">
+                                        <span class="border-b border-gray-400 px-1">50</span>
+                                        <span>2</span>
+                                    </div>
+                                    <span>= 25</span>
+                                </div>
+                                <div>Clase mediana: 4 (30-37)</div>
+                                <div class="flex flex-wrap items-baseline gap-x-1">
+                                    <span>Me = L<sub>i</sub> +</span>
+                                    <div class="flex flex-col items-center">
+                                        <span class="border-b border-gray-400 px-1">(N/2 - F<sub>i-1</sub>)</span>
+                                        <span>f<sub>i</sub></span>
+                                    </div>
+                                    <span>× c = 22 +</span>
+                                    <div class="flex flex-col items-center">
+                                        <span class="border-b border-gray-400 px-1">(25 - 17)</span>
+                                        <span>7</span>
+                                    </div>
+                                    <span>× 8 = 31.14</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Moda -->
+                    <div>
+                        <h3 class="text-lg font-semibold mb-2 text-blue-700">Moda</h3>
+                        <div class="bg-gray-50 p-4 rounded-lg">
+                            <p class="text-gray-700 mb-2">La moda es el valor que aparece con mayor frecuencia.</p>
+                            <div class="bg-blue-50 p-4 rounded-lg border-2 border-blue-200 space-y-2">
+                                <div>Clase modal: 2 (14-21) con f<sub>i</sub> = 12</div>
+                                <div class="flex flex-wrap items-baseline gap-x-1">
+                                    <span>Mo = L<sub>i</sub> +</span>
+                                    <div class="flex flex-col items-center">
+                                        <span class="border-b border-gray-400 px-1">d<sub>1</sub></span>
+                                        <span>(d<sub>1</sub> + d<sub>2</sub>)</span>
+                                    </div>
+                                    <span>× c = 14 +</span>
+                                    <div class="flex flex-col items-center">
+                                        <span class="border-b border-gray-400 px-1">7</span>
+                                        <span>12</span>
+                                    </div>
+                                    <span>× 8 = 18.67</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Medidas de Dispersión -->
+            <div class="bg-white rounded-xl shadow-md p-6">
+                <h2 class="text-xl font-bold mb-4 text-gray-800">Medidas de Dispersión</h2>
+                <div class="grid grid-cols-1 gap-6">
+                    <!-- Varianza -->
+                    <div>
+                        <h3 class="text-lg font-semibold mb-2 text-red-700">Varianza</h3>
+                        <div class="bg-gray-50 p-4 rounded-lg">
+                            <p class="text-gray-700 mb-2">La varianza mide cuánto se alejan los valores respecto a la
+                                media.</p>
+                            <div class="bg-red-50 p-4 rounded-lg border-2 border-red-200 space-y-3">
+                                <div class="flex items-baseline flex-wrap gap-x-2">
+                                    <span class="italic">σ²</span>
+                                    <span>=</span>
+                                    <div class="flex flex-col items-center">
+                                        <span class="border-b border-gray-400 px-1">Σf<sub>i</sub>(x<sub>i</sub> -
+                                            μ)²</span>
+                                        <span>N</span>
+                                    </div>
+                                    <span>=</span>
+                                    <div class="flex flex-col items-center">
+                                        <span class="border-b border-gray-400 px-1">58032.5</span>
+                                        <span>50</span>
+                                    </div>
+                                    <span>- 30.94²</span>
+                                </div>
+                                <div class="flex items-baseline space-x-2">
+                                    <span>= 1160.65 - 957.28</span>
+                                    <span class="font-bold text-green-700">= 185.86</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Desviación Estándar -->
+                    <div>
+                        <h3 class="text-lg font-semibold mb-2 text-red-700">Desviación Estándar</h3>
+                        <div class="bg-gray-50 p-4 rounded-lg">
+                            <p class="text-gray-700 mb-2">La desviación estándar indica la dispersión de los datos
+                                respecto a la
+                                media.</p>
+                            <div class="bg-red-50 p-4 rounded-lg border-2 border-red-200">
+                                <div class="flex items-baseline space-x-2">
+                                    <span class="italic">σ</span>
+                                    <span>= √185.86</span>
+                                    <span class="font-bold text-green-700">= 13.63</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Coeficiente de Variación -->
+                    <div>
+                        <h3 class="text-lg font-semibold mb-2 text-red-700">Coeficiente de Variación</h3>
+                        <div class="bg-gray-50 p-4 rounded-lg">
+                            <p class="text-gray-700 mb-2">El coeficiente de variación expresa la desviación estándar
+                                como
+                                porcentaje de la media.</p>
+                            <div class="bg-red-50 p-4 rounded-lg border-2 border-red-200">
+                                <div class="flex flex-wrap items-baseline gap-x-1">
+                                    <span>CV =</span>
+                                    <div class="flex flex-col items-center">
+                                        <span class="border-b border-gray-400 px-1">13.63</span>
+                                        <span>30.94</span>
+                                    </div>
+                                    <span>× 100%</span>
+                                    <span class="font-bold text-green-700">= 44.05%</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tabla de Frecuencias Completa y Conclusión -->
+        <div class="grid grid-cols-1 gap-6 mb-6">
+            <div class="bg-white rounded-xl shadow-md p-6">
+                <h2 class="text-xl font-bold mb-4 text-gray-800">Tabla de Frecuencias Completa</h2>
+                <div class="overflow-x-auto">
+                    <table class="min-w-full bg-white border border-gray-200">
+                        <thead>
+                            <tr class="bg-gray-100">
+                                <th class="py-2 px-2 border text-sm font-medium">Clase</th>
+                                <th class="py-2 px-2 border text-sm font-medium">Límites</th>
+                                <th class="py-2 px-2 border text-sm font-medium">x<sub>i</sub></th>
+                                <th class="py-2 px-2 border text-sm font-medium">f<sub>i</sub></th>
+                                <th class="py-2 px-2 border text-sm font-medium">h<sub>i</sub></th>
+                                <th class="py-2 px-2 border text-sm font-medium">F<sub>i</sub></th>
+                                <th class="py-2 px-2 border text-sm font-medium">H<sub>i</sub></th>
+                                <th class="py-2 px-2 border text-sm font-medium">f<sub>i</sub>·x<sub>i</sub></th>
+                                <th class="py-2 px-2 border text-sm font-medium">f<sub>i</sub>·x<sub>i</sub>²</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="py-2 px-2 border text-sm">1</td>
+                                <td class="py-2 px-2 border text-sm">6-13</td>
+                                <td class="py-2 px-2 border text-sm">9.5</td>
+                                <td class="py-2 px-2 border text-sm">5</td>
+                                <td class="py-2 px-2 border text-sm">0.10</td>
+                                <td class="py-2 px-2 border text-sm">5</td>
+                                <td class="py-2 px-2 border text-sm">0.10</td>
+                                <td class="py-2 px-2 border text-sm">47.5</td>
+                                <td class="py-2 px-2 border text-sm">451.25</td>
+                            </tr>
+                            <tr>
+                                <td class="py-2 px-2 border text-sm">2</td>
+                                <td class="py-2 px-2 border text-sm">14-21</td>
+                                <td class="py-2 px-2 border text-sm">17.5</td>
+                                <td class="py-2 px-2 border text-sm">12</td>
+                                <td class="py-2 px-2 border text-sm">0.24</td>
+                                <td class="py-2 px-2 border text-sm">17</td>
+                                <td class="py-2 px-2 border text-sm">0.34</td>
+                                <td class="py-2 px-2 border text-sm">210.0</td>
+                                <td class="py-2 px-2 border text-sm">3675.00</td>
+                            </tr>
+                            <tr>
+                                <td class="py-2 px-2 border text-sm">3</td>
+                                <td class="py-2 px-2 border text-sm">22-29</td>
+                                <td class="py-2 px-2 border text-sm">25.5</td>
+                                <td class="py-2 px-2 border text-sm">7</td>
+                                <td class="py-2 px-2 border text-sm">0.14</td>
+                                <td class="py-2 px-2 border text-sm">24</td>
+                                <td class="py-2 px-2 border text-sm">0.48</td>
+                                <td class="py-2 px-2 border text-sm">178.5</td>
+                                <td class="py-2 px-2 border text-sm">4551.75</td>
+                            </tr>
+                            <tr>
+                                <td class="py-2 px-2 border text-sm">4</td>
+                                <td class="py-2 px-2 border text-sm">30-37</td>
+                                <td class="py-2 px-2 border text-sm">33.5</td>
+                                <td class="py-2 px-2 border text-sm">9</td>
+                                <td class="py-2 px-2 border text-sm">0.18</td>
+                                <td class="py-2 px-2 border text-sm">33</td>
+                                <td class="py-2 px-2 border text-sm">0.66</td>
+                                <td class="py-2 px-2 border text-sm">301.5</td>
+                                <td class="py-2 px-2 border text-sm">10100.25</td>
+                            </tr>
+                            <tr>
+                                <td class="py-2 px-2 border text-sm">5</td>
+                                <td class="py-2 px-2 border text-sm">38-45</td>
+                                <td class="py-2 px-2 border text-sm">41.5</td>
+                                <td class="py-2 px-2 border text-sm">8</td>
+                                <td class="py-2 px-2 border text-sm">0.16</td>
+                                <td class="py-2 px-2 border text-sm">41</td>
+                                <td class="py-2 px-2 border text-sm">0.82</td>
+                                <td class="py-2 px-2 border text-sm">332.0</td>
+                                <td class="py-2 px-2 border text-sm">13778.00</td>
+                            </tr>
+                            <tr>
+                                <td class="py-2 px-2 border text-sm">6</td>
+                                <td class="py-2 px-2 border text-sm">46-53</td>
+                                <td class="py-2 px-2 border text-sm">49.5</td>
+                                <td class="py-2 px-2 border text-sm">5</td>
+                                <td class="py-2 px-2 border text-sm">0.10</td>
+                                <td class="py-2 px-2 border text-sm">46</td>
+                                <td class="py-2 px-2 border text-sm">0.92</td>
+                                <td class="py-2 px-2 border text-sm">247.5</td>
+                                <td class="py-2 px-2 border text-sm">12251.25</td>
+                            </tr>
+                            <tr>
+                                <td class="py-2 px-2 border text-sm">7</td>
+                                <td class="py-2 px-2 border text-sm">54-61</td>
+                                <td class="py-2 px-2 border text-sm">57.5</td>
+                                <td class="py-2 px-2 border text-sm">4</td>
+                                <td class="py-2 px-2 border text-sm">0.08</td>
+                                <td class="py-2 px-2 border text-sm">50</td>
+                                <td class="py-2 px-2 border text-sm">1.00</td>
+                                <td class="py-2 px-2 border text-sm">230.0</td>
+                                <td class="py-2 px-2 border text-sm">13225.00</td>
+                            </tr>
+                            <tr class="bg-gray-100 font-medium">
+                                <td class="py-2 px-2 border text-sm" colspan="3">Total</td>
+                                <td class="py-2 px-2 border text-sm">50</td>
+                                <td class="py-2 px-2 border text-sm">1.00</td>
+                                <td class="py-2 px-2 border text-sm">-</td>
+                                <td class="py-2 px-2 border text-sm">-</td>
+                                <td class="py-2 px-2 border text-sm">1547.0</td>
+                                <td class="py-2 px-2 border text-sm">58032.50</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Conclusión -->
+            <div class="bg-white rounded-xl shadow-md p-6">
+                <h2 class="text-xl font-bold mb-4 text-gray-800">Conclusión</h2>
+                <div class="bg-gray-50 p-4 rounded-lg">
+                    <p class="text-gray-700 mb-3">Del análisis de los tiempos de desplazamiento:</p>
+                    <ul class="list-disc list-inside space-y-2 text-gray-700">
+                        <li>El 50% de los encuestados tarda <span class="font-semibold">menos de 31 minutos</span></li>
+                        <li>La mayoría (24%) tarda entre <span class="font-semibold">11-20 minutos</span></li>
+                        <li>Existe una <span class="font-semibold">variación considerable</span> (CV = 44.05%)</li>
+                        <li>Solo el 8% supera los <span class="font-semibold">54 minutos</span> de trayecto</li>
+                    </ul>
+                    <p class="text-gray-700 mt-3">Estos resultados indican que la mayoría tiene desplazamientos
+                        relativamente
+                        cortos, pero existe un grupo significativo con tiempos de viaje elevados que merece atención
+                        particular.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Datos para las gráficas
+        const chartData = {
+            labels: ['≤13 min', '≤21 min', '≤29 min', '≤37 min', '≤45 min', '≤53 min', '≤61 min'],
+            frequencies: [5, 12, 7, 9, 8, 5, 4],
+            acumFrequencies: [5, 17, 24, 33, 41, 46, 50]
+        };
+
+
+        // Configuración inicial del gráfico
+        let chart = new Chart(document.getElementById('mainChart'), {
+            type: 'bar',
+            data: {
+                labels: chartData.labels,
+                datasets: [{
+                    label: 'Frecuencia Absoluta',
+                    data: chartData.frequencies,
+                    backgroundColor: 'rgba(59, 130, 246, 0.8)',
+                    borderColor: 'rgba(59, 130, 246, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: 'Frecuencia'
+                        }
+                    },
+                    x: {
+                        title: {
+                            display: true,
+                            text: 'Rangos de Edad'
+                        }
+                    }
+                }
+            }
+        });
+
+        // Controladores de eventos para los botones
+        document.getElementById('btnBarChart').addEventListener('click', () => {
+            updateChart('bar', 'Frecuencia Absoluta', chartData.frequencies);
+            toggleActiveButton('btnBarChart');
+        });
+
+        document.getElementById('btnPolyChart').addEventListener('click', () => {
+            updateChart('line', 'Polígono de Frecuencias', chartData.frequencies, true);
+            toggleActiveButton('btnPolyChart');
+        });
+
+        document.getElementById('btnOgiveChart').addEventListener('click', () => {
+            updateChart('line', 'Ojiva de Frecuencias Acumuladas', chartData.acumFrequencies, false, true);
+            toggleActiveButton('btnOgiveChart');
+        });
+
+        // Funciones de ayuda
+        function updateChart(type, label, data, fill = false, isOgive = false) {
+            chart.destroy();
+            chart = new Chart(document.getElementById('mainChart'), {
+                type: type,
+                data: {
+                    labels: isOgive ? chartData.labels : chartData.labels.slice(0, -1),
+                    datasets: [{
+                        label: label,
+                        data: data,
+                        backgroundColor: isOgive ? 'rgba(74, 222, 128, 0.2)' : 'rgba(59, 130, 246, 0.8)',
+                        borderColor: isOgive ? 'rgba(34, 197, 94, 1)' : 'rgba(59, 130, 246, 1)',
+                        borderWidth: 2,
+                        fill: fill,
+                        tension: 0.4,
+                        stepped: isOgive ? 'after' : false,
+                        pointRadius: isOgive ? 4 : 3,
+                        pointBackgroundColor: isOgive ? 'rgba(34, 197, 94, 1)' : 'rgba(59, 130, 246, 1)'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: isOgive ? 'Frecuencia Acumulada' : 'Frecuencia'
+                            }
+                        },
+                        x: {
+                            title: {
+                                display: true,
+                                text: isOgive ? 'Tiempo Máximo (minutos)' : 'Rango de Tiempo (minutos)'
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        function toggleActiveButton(activeId) {
+            document.querySelectorAll('[id^="btn"]').forEach(btn => {
+                btn.classList.remove('bg-blue-600', 'text-white');
+                btn.classList.add('bg-gray-200', 'text-gray-700');
+            });
+            document.getElementById(activeId).classList.add('bg-blue-600', 'text-white');
+            document.getElementById(activeId).classList.remove('bg-gray-200', 'text-gray-700');
+        }
+    </script>
+
+</body>
+
+</html>
