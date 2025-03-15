@@ -139,7 +139,7 @@
                                         Fi</th>
                                     <th
                                         class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                        Fr</th>
+                                        FR</th>
                                 </tr>
                             </thead>
                             <tbody class="bg-white divide-y divide-gray-200">
@@ -500,102 +500,118 @@
     <script>
         // Datos para las gráficas
         const chartData = {
-            labels: ['≤13 min', '≤21 min', '≤29 min', '≤37 min', '≤45 min', '≤53 min', '≤61 min'],
+            classLimits: ['6-13', '14-21', '22-29', '30-37', '38-45', '46-53', '54-61'],
             frequencies: [5, 12, 7, 9, 8, 5, 4],
-            acumFrequencies: [5, 17, 24, 33, 41, 46, 50]
+            acumFrequencies: [5, 17, 24, 33, 41, 46, 50],
+            upperLimits: [13, 21, 29, 37, 45, 53, 61] // Límites superiores reales
         };
 
+        let chart = inicializarChart();
 
-        // Configuración inicial del gráfico
-        let chart = new Chart(document.getElementById('mainChart'), {
-            type: 'bar',
-            data: {
-                labels: chartData.labels,
-                datasets: [{
-                    label: 'Frecuencia Absoluta',
-                    data: chartData.frequencies,
-                    backgroundColor: 'rgba(59, 130, 246, 0.8)',
-                    borderColor: 'rgba(59, 130, 246, 1)',
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                scales: {
-                    y: {
-                        beginAtZero: true,
-                        title: {
-                            display: true,
-                            text: 'Frecuencia'
-                        }
-                    },
-                    x: {
-                        title: {
-                            display: true,
-                            text: 'Rangos de Edad'
-                        }
-                    }
-                }
-            }
-        });
-
-        // Controladores de eventos para los botones
+        // Event Listeners
         document.getElementById('btnBarChart').addEventListener('click', () => {
-            updateChart('bar', 'Frecuencia Absoluta', chartData.frequencies);
+            updateChart('bar', chartData.classLimits, 'Frecuencia Absoluta', chartData.frequencies);
             toggleActiveButton('btnBarChart');
         });
 
         document.getElementById('btnPolyChart').addEventListener('click', () => {
-            updateChart('line', 'Polígono de Frecuencias', chartData.frequencies, true);
+            updateChart('line', chartData.classLimits, 'Polígono de Frecuencias', chartData.frequencies, true);
             toggleActiveButton('btnPolyChart');
         });
 
         document.getElementById('btnOgiveChart').addEventListener('click', () => {
-            updateChart('line', 'Ojiva de Frecuencias Acumuladas', chartData.acumFrequencies, false, true);
+            crearOjivaSuave();
             toggleActiveButton('btnOgiveChart');
         });
 
-        // Funciones de ayuda
-        function updateChart(type, label, data, fill = false, isOgive = false) {
+        function inicializarChart() {
+            return new Chart(document.getElementById('mainChart'), {
+                type: 'bar',
+                data: {
+                    labels: chartData.classLimits,
+                    datasets: [{
+                        label: 'Frecuencia Absoluta',
+                        data: chartData.frequencies,
+                        backgroundColor: 'rgba(59, 130, 246, 0.8)',
+                        borderColor: 'rgba(59, 130, 246, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: getCommonOptions('Rango de Tiempo (minutos)', 'Frecuencia')
+            });
+        }
+
+        function crearOjivaSuave() {
             chart.destroy();
             chart = new Chart(document.getElementById('mainChart'), {
-                type: type,
+                type: 'line',
                 data: {
-                    labels: isOgive ? chartData.labels : chartData.labels.slice(0, -1),
                     datasets: [{
-                        label: label,
-                        data: data,
-                        backgroundColor: isOgive ? 'rgba(74, 222, 128, 0.2)' : 'rgba(59, 130, 246, 0.8)',
-                        borderColor: isOgive ? 'rgba(34, 197, 94, 1)' : 'rgba(59, 130, 246, 1)',
+                        label: 'Ojiva de Frecuencias Acumuladas',
+                        data: chartData.upperLimits.map((limit, index) => ({
+                            x: limit,
+                            y: chartData.acumFrequencies[index]
+                        })),
+                        backgroundColor: 'rgba(34, 197, 94, 0.2)',
+                        borderColor: 'rgba(34, 197, 94, 1)',
                         borderWidth: 2,
-                        fill: fill,
-                        tension: 0.4,
-                        stepped: isOgive ? 'after' : false,
-                        pointRadius: isOgive ? 4 : 3,
-                        pointBackgroundColor: isOgive ? 'rgba(34, 197, 94, 1)' : 'rgba(59, 130, 246, 1)'
+                        fill: false,
+                        tension: 0.4, // Curva suave
+                        pointRadius: 5,
+                        pointBackgroundColor: 'rgba(34, 197, 94, 1)'
                     }]
                 },
                 options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
+                    ...getCommonOptions('Tiempo (minutos)', 'Frecuencia Acumulada'),
                     scales: {
-                        y: {
-                            beginAtZero: true,
-                            title: {
-                                display: true,
-                                text: isOgive ? 'Frecuencia Acumulada' : 'Frecuencia'
-                            }
-                        },
                         x: {
-                            title: {
-                                display: true,
-                                text: isOgive ? 'Tiempo Máximo (minutos)' : 'Rango de Tiempo (minutos)'
+                            type: 'linear',
+                            ticks: {
+                                callback: function (value) {
+                                    return value + ' min';
+                                },
+                                stepSize: 8
                             }
                         }
                     }
                 }
             });
+        }
+
+        function updateChart(type, labels, label, data, fill = false) {
+            chart.destroy();
+            chart = new Chart(document.getElementById('mainChart'), {
+                type: type,
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: label,
+                        data: data,
+                        backgroundColor: 'rgba(59, 130, 246, 0.8)',
+                        borderColor: 'rgba(59, 130, 246, 1)',
+                        borderWidth: 1,
+                        fill: fill,
+                        tension: fill ? 0.4 : 0
+                    }]
+                },
+                options: getCommonOptions('Rango de Tiempo (minutos)', 'Frecuencia')
+            });
+        }
+
+        function getCommonOptions(xTitle, yTitle) {
+            return {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        title: { display: true, text: yTitle }
+                    },
+                    x: {
+                        title: { display: true, text: xTitle }
+                    }
+                }
+            };
         }
 
         function toggleActiveButton(activeId) {
@@ -604,7 +620,6 @@
                 btn.classList.add('bg-gray-200', 'text-gray-700');
             });
             document.getElementById(activeId).classList.add('bg-blue-600', 'text-white');
-            document.getElementById(activeId).classList.remove('bg-gray-200', 'text-gray-700');
         }
     </script>
 
